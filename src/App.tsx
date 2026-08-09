@@ -32,8 +32,8 @@ import mobileUiOrderCartImg from '@/imports/mobil ui/order cart.webp'
 import mobileUiProfileImg from '@/imports/mobil ui/profile.webp'
 import mobileUiLoginImg    from '@/imports/mobil ui/login.webp'
 import heroPortraitImg  from '@/imports/webp/profile.webp'
-import sigImg             from '@/imports/webp/sig.webp'
-import sigDarkImg         from '@/imports/webp/sig.webp'
+import sigImg             from '@/imports/webp/sig-light.webp'
+import sigDarkImg         from '@/imports/webp/sig-dark.webp'
 import flowHub1Img        from '@/imports/webp/whatsapp_image_2026-08-07_at_22.25.25.webp'
 import flowHub2Img        from '@/imports/webp/whatsapp_image_2026-08-07_at_22.25.28.webp'
 import flowHub3Img        from '@/imports/webp/whatsapp_image_2026-08-07_at_22.25.28__1_.webp'
@@ -50,6 +50,8 @@ import lifeBatteryImg     from '@/imports/webp/life battary casetady.webp'
 import surayaPortfolioImg from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__10_.webp'
 import surayaPortfolio2Img from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__10_-1.webp'
 import designingExpImg    from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41.webp'
+import group2Img         from '@/imports/webp/group-2.webp'
+import drinketImg        from '@/imports/webp/drenkit.webp'
 
 function GithubIcon({ size = 16, strokeWidth = 1.75 }: { size?: number; strokeWidth?: number }) {
   return (
@@ -99,6 +101,20 @@ const projects = [
     img: evChargingImg,
     desc: 'Real-time EV charging station locator serving 50K+ stations and 200K+ active users with 99.9% uptime and a clean, trust-building UI.',
   },
+  {
+    title: 'Life Battery',
+    category: 'Wellness · Mobile App',
+    year: '2026',
+    img: lifeBatteryImg,
+    desc: 'Wellness and energy tracking app — analytics, insights and habit suggestions for balanced daily routines.',
+  },
+  {
+    title: 'Drinket',
+    category: 'Delivery · Mobile App',
+    year: '2026',
+    img: drinketImg,
+    desc: 'Liquor delivery mobile app with fast checkout, category browsing and cart flows optimized for conversion.',
+  },
 ]
 
 const galleryItems = [
@@ -106,7 +122,7 @@ const galleryItems = [
   { img: frame155Img,    alt: 'Cyber risk dashboard' },
   { img: heroProjectImg, alt: 'VJ Unique Properties website' },
   { img: logozhdImg,     alt: 'Zanzibar Investment Summit branding' },
-  { img: foodImg,        alt: 'Food delivery app design' },
+  { img: group2Img,      alt: 'Showcase group image' },
 ]
 
 const skills = [
