@@ -10,38 +10,46 @@ import {
 import { useSound } from './useSound'
 
 /* ── Asset imports ─────────────────────────────────────────────────── */
-import evChargingImg  from '@/imports/EV-Charging.jpg'
-import foodImg        from '@/imports/Food.jpg'
-import frame155Img    from '@/imports/Frame_155.png'
-import heroProjectImg from '@/imports/Hero.png'
-import hrmImg         from '@/imports/HRM-Dashboard.jpg'
-import mindEaseImg    from '@/imports/image__2_.png'
-import kfcImg         from '@/imports/KFC_TUMNAIL.2.png'
-import logozhdImg     from '@/imports/LogoZHD.jpg'
-import darkLogoImg    from '@/imports/dark-logo.png'
-import lightLogoImg   from '@/imports/light-logo.png'
-import miniBankImg      from '@/imports/Mini-Bank.jpg'
+import evChargingImg  from '@/imports/webp/ev-charging.webp'
+import foodImg        from '@/imports/webp/food.webp'
+import frame155Img    from '@/imports/webp/frame_155.webp'
+import heroProjectImg from '@/imports/webp/hero.webp'
+import hrmImg         from '@/imports/webp/hrm-dashboard.webp'
+import mindEaseImg    from '@/imports/webp/image__2_.webp'
+import kfcImg         from '@/imports/webp/kfc_tumnail.2.webp'
+import logozhdImg     from '@/imports/webp/logozhd.webp'
+import darkLogoImg    from '@/imports/webp/dark-logo.webp'
+import lightLogoImg   from '@/imports/webp/light-logo.webp'
+import miniBankImg      from '@/imports/webp/mini-bank.webp'
 import resumePdf        from '@/imports/YogeshWaran-J30T1-1.pdf'
-import profileImg       from '@/imports/profile1.jpeg'
-import heroPortraitImg  from '@/imports/profile.png'
-import sigImg             from '@/imports/sig.png'
-import sigDarkImg         from '@/imports/sig-dark.png'
-import flowHub1Img        from '@/imports/WhatsApp_Image_2026-08-07_at_22.25.25.jpeg'
-import flowHub2Img        from '@/imports/WhatsApp_Image_2026-08-07_at_22.25.28.jpeg'
-import flowHub3Img        from '@/imports/WhatsApp_Image_2026-08-07_at_22.25.28__1_.jpeg'
-import flowHub4Img        from '@/imports/WhatsApp_Image_2026-08-07_at_22.25.28__2_.jpeg'
-import socialGridImg      from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.40__1_.jpeg'
-import yogaAppImg         from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.40.jpeg'
-import fashionAppImg      from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__2_.jpeg'
-import showcashImg        from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__7_.jpeg'
-import globalTechImg      from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__8_.jpeg'
-import travelAppImg       from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__4_.jpeg'
-import travelCaseImg      from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__3_.jpeg'
-import greenMuseImg       from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__9_.jpeg'
-import lifeBatteryImg     from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__5_.jpeg'
-import surayaPortfolioImg from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__10_.jpeg'
-import surayaPortfolio2Img from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41__10_-1.jpeg'
-import designingExpImg    from '@/imports/WhatsApp_Image_2026-08-07_at_21.29.41.jpeg'
+import profileImg       from '@/imports/webp/profile1.webp'
+import mobileUi01Img       from '@/imports/mobil ui/01.webp'
+import mobileUiHomeImg     from '@/imports/mobil ui/01_Home.webp'
+import mobileUi02Img       from '@/imports/mobil ui/02.webp'
+import mobileUiDashboardImg from '@/imports/mobil ui/02_Dashbaord.webp'
+import mobileUiInnerImg    from '@/imports/mobil ui/03_Inner Screen.webp'
+import mobileUiOrderCartImg from '@/imports/mobil ui/order cart.webp'
+import mobileUiProfileImg from '@/imports/mobil ui/profile.webp'
+import mobileUiLoginImg    from '@/imports/mobil ui/login.webp'
+import heroPortraitImg  from '@/imports/webp/profile.webp'
+import sigImg             from '@/imports/webp/sig.webp'
+import sigDarkImg         from '@/imports/webp/sig.webp'
+import flowHub1Img        from '@/imports/webp/whatsapp_image_2026-08-07_at_22.25.25.webp'
+import flowHub2Img        from '@/imports/webp/whatsapp_image_2026-08-07_at_22.25.28.webp'
+import flowHub3Img        from '@/imports/webp/whatsapp_image_2026-08-07_at_22.25.28__1_.webp'
+import flowHub4Img        from '@/imports/webp/whatsapp_image_2026-08-07_at_22.25.28__2_.webp'
+import socialGridImg      from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.40__1_.webp'
+import yogaAppImg         from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.40.webp'
+import fashionAppImg      from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__2_.webp'
+import showcashImg        from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__7_.webp'
+import globalTechImg      from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__8_.webp'
+import travelAppImg       from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__4_.webp'
+import travelCaseImg      from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__3_.webp'
+import greenMuseImg       from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__9_.webp'
+import lifeBatteryImg     from '@/imports/webp/life battary casetady.webp'
+import surayaPortfolioImg from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__10_.webp'
+import surayaPortfolio2Img from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41__10_-1.webp'
+import designingExpImg    from '@/imports/webp/whatsapp_image_2026-08-07_at_21.29.41.webp'
 
 function GithubIcon({ size = 16, strokeWidth = 1.75 }: { size?: number; strokeWidth?: number }) {
   return (
@@ -115,6 +123,41 @@ const skills = [
 ]
 
 const tools = ['Figma', 'Adobe XD', 'Framer', 'Photoshop', 'FigJam', 'Miro', 'ChatGPT', 'Figma AI', 'Claude AI']
+
+const sectionHeading: React.CSSProperties = {
+  fontFamily: "'Big Shoulders Display', sans-serif",
+  fontWeight: 900,
+  letterSpacing: '-0.02em',
+  color: 'var(--text)',
+  margin: 0,
+  lineHeight: 1.05,
+}
+
+const sectionHeadingLarge: React.CSSProperties = {
+  ...sectionHeading,
+  fontSize: 'clamp(42px, 5.4vw, 72px)',
+}
+
+const sectionHeadingMedium: React.CSSProperties = {
+  ...sectionHeading,
+  fontSize: 'clamp(32px, 4.2vw, 52px)',
+}
+
+const sectionHeadingSmall: React.CSSProperties = {
+  ...sectionHeading,
+  fontSize: 'clamp(24px, 3.5vw, 36px)',
+}
+
+const sectionSubheading: React.CSSProperties = {
+  fontFamily: "'Big Shoulders Display', sans-serif",
+  fontWeight: 600,
+  fontSize: 'clamp(16px, 2vw, 18px)',
+  lineHeight: 1.6,
+  letterSpacing: '0.02em',
+  color: 'var(--text4)',
+  maxWidth: '400px',
+  margin: 0,
+}
 
 const frontendTools = ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Angular', 'React']
 
@@ -831,7 +874,7 @@ export default function App() {
             </div>
 
             <p style={{ fontSize:'11px', color:'var(--skill-muted)', letterSpacing:'0.14em', textTransform:'uppercase', margin:'0 0 10px' }}>My Professional</p>
-            <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(32px,4.2vw,54px)', lineHeight:1.06, letterSpacing:'-0.02em', color:'var(--text)', margin:'0 0 32px' }}>
+            <h2 style={{ ...sectionHeadingMedium, margin:'0 0 32px' }}>
               Designing products<br/>
               people{' '}
               <span style={{ color:'var(--accent)', padding:'2px 12px', borderRadius:'12px', background:'var(--accent-bg)', border:'1px solid var(--accent-border)', display:'inline-block' }}>actually</span>
@@ -894,7 +937,7 @@ export default function App() {
       {/* ── Experience ─────────────────────────────────────────── */}
       <section id="experience" data-reveal style={{ background:'var(--exp-bg)', color:'var(--exp-text)', padding:'clamp(80px,10vw,120px) clamp(20px,6vw,80px)', transition:'background 0.4s ease' }}>
         <div style={{ maxWidth:'1320px', margin:'0 auto' }}>
-          <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, textTransform:'uppercase', letterSpacing:'-0.02em', fontSize:'clamp(52px,8vw,100px)', lineHeight:1, margin:'0 0 56px', color:'var(--exp-text)' }}>
+          <h2 style={{ ...sectionHeadingLarge, textTransform:'uppercase', color:'var(--exp-text)', margin:'0 0 56px' }}>
             Experience
           </h2>
           {experience.map((exp, i) => (
@@ -932,7 +975,7 @@ export default function App() {
           <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:'48px', flexWrap:'wrap', gap:'16px' }}>
             <div>
               <p style={{ fontSize:'11px', color:'var(--text4)', letterSpacing:'0.14em', textTransform:'uppercase', margin:'0 0 6px' }}>Selected Work</p>
-              <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(32px,4.2vw,52px)', letterSpacing:'-0.02em', color:'var(--text)', margin:0 }}>
+              <h2 style={{ ...sectionHeadingMedium }}>
                 <DecryptText text="Featured Projects" trigger={workVisible} />
               </h2>
             </div>
@@ -953,7 +996,7 @@ export default function App() {
         <div style={{ maxWidth:'1320px', margin:'0 auto' }}>
           <div style={{ textAlign:'center', marginBottom:'48px' }}>
             <p style={{ fontSize:'11px', color:'var(--text4)', letterSpacing:'0.14em', textTransform:'uppercase', margin:'0 0 8px' }}>More Work</p>
-            <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(32px,4.2vw,52px)', letterSpacing:'-0.02em', color:'var(--text)', margin:0 }}>Design Gallery</h2>
+            <h2 style={{ ...sectionHeadingMedium }}>Design Gallery</h2>
           </div>
 
           {/* 5-slot asymmetric grid */}
@@ -1016,6 +1059,8 @@ export default function App() {
 
       {/* ── Social Media Posters ───────────────────────────────── */}
       <SocialPostersSection />
+      {/* ── Social Media Slider (auto-scrolling) ───────────────── */}
+      <SocialSliderSection />
 
       {/* ── Hybrid Advantage Banner ────────────────────────────── */}
       <HybridAdvantageSection />
@@ -1024,7 +1069,7 @@ export default function App() {
       <section id="contact" data-reveal style={{ background:'var(--contact-bg)', color:'var(--contact-text)', padding:'clamp(80px,10vw,120px) clamp(20px,6vw,80px)', transition:'background 0.4s ease' }}>
         <div style={{ maxWidth:'1320px', margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:'60px', alignItems:'center' }}>
           <div>
-            <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(48px,6.5vw,84px)', lineHeight:1.02, letterSpacing:'-0.03em', color:'var(--contact-text)', margin:'0 0 24px' }}>
+            <h2 style={{ ...sectionHeadingLarge, color:'var(--contact-text)', margin:'0 0 24px', letterSpacing:'-0.03em' }}>
               Let's create<br/>together!
             </h2>
             <p style={{ fontSize:'15px', lineHeight:'1.75', color:'#6B7280', maxWidth:'340px', margin:'0 0 32px' }}>
@@ -1079,7 +1124,7 @@ export default function App() {
           </div>
 
           <p style={{ fontSize:'11px', letterSpacing:'0.12em', textTransform:'uppercase', color:'var(--footer-sub)', margin:'0 0 4px' }}>Have a project in mind?</p>
-          <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(52px,10.5vw,148px)', letterSpacing:'-0.025em', lineHeight:0.9, color:'var(--footer-text)', margin:'0 0 12px' }}>
+          <h2 style={{ ...sectionHeadingLarge, color:'var(--footer-text)', margin:'0 0 12px', letterSpacing:'-0.025em', lineHeight:0.9 }}>
             Let's Talk
           </h2>
 
@@ -1176,11 +1221,11 @@ function HybridAdvantageSection() {
         }}>
           <div style={{ display:'grid', gridTemplateColumns:'1.05fr 0.95fr', minHeight:'380px' }}>
             <div style={{ padding:'clamp(40px,5vw,72px)', display:'grid', gap:'20px', borderRight:'1px solid rgba(0,0,0,0.04)' }}>
-              <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(34px,4.4vw,48px)', lineHeight:1.05, letterSpacing:'-0.03em', color:'var(--text)', margin:0 }}>
+              <h2 style={{ ...sectionHeadingMedium }}>
                 UI/UX Design &<br />
                 Development
               </h2>
-              <p style={{ margin:0, fontSize:'16px', lineHeight:1.8, color:'var(--text3)', maxWidth:'560px' }}>
+              <p style={{ ...sectionSubheading, maxWidth:'560px' }}>
                 I design and develop modern, responsive web and mobile applications that deliver seamless user experiences and drive results.
               </p>
               <a href="#work" style={{ display:'inline-flex', alignItems:'center', gap:'10px', marginTop:'14px', color:'var(--link)', fontWeight:700, fontSize:'15px', textDecoration:'none' }}>
@@ -1221,7 +1266,7 @@ function IndependentProjectsSection() {
               <Briefcase size={13} strokeWidth={1.75} style={{ color:'var(--accent)' }}/>
               <span style={{ fontSize:'11px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'var(--accent)' }}>Freelance Work</span>
             </div>
-            <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(32px,4.2vw,52px)', letterSpacing:'-0.02em', color:'var(--text)', margin:0 }}>
+            <h2 style={{ ...sectionHeadingMedium }}>
               Independent Projects
             </h2>
           </div>
@@ -1385,7 +1430,7 @@ function ExpItem({ exp, last }: { exp: typeof experience[0]; last: boolean }) {
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', gap:'24px', flexWrap:'wrap', padding:'clamp(24px,3vw,36px) 0' }}>
         <div style={{ flex:1 }}>
           <div style={{ display:'flex', alignItems:'center', gap:'12px', flexWrap:'wrap', marginBottom:'6px' }}>
-            <h3 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(28px,3.5vw,46px)', letterSpacing:'-0.02em', color:'var(--exp-text)', margin:0, textTransform:'uppercase' }}>{exp.company}</h3>
+            <h3 style={{ ...sectionHeadingMedium, color:'var(--exp-text)', margin:0, lineHeight:1.1, textTransform:'uppercase' }}>{exp.company}</h3>
             <span style={{ padding:'4px 12px', borderRadius:'9999px', fontSize:'11px', fontWeight:600, background:'rgba(0,0,0,0.08)', color:'var(--exp-muted)' }}>{exp.industry}</span>
           </div>
           <div style={{ display:'flex', flexWrap:'wrap', gap:'16px' }}>
@@ -1578,14 +1623,14 @@ function SocialPostersSection() {
           <div>
             <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', padding:'6px 14px', borderRadius:'9999px', background:'var(--accent-bg)', border:'1px solid var(--accent-border)', marginBottom:'14px' }}>
               <Share2 size={13} strokeWidth={1.75} style={{ color:'var(--accent)' }}/>
-              <span style={{ fontSize:'11px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'var(--accent)' }}>Social Media Design</span>
+              <span style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.16em', textTransform:'uppercase', color:'var(--accent)' }}>Social Media Design</span>
             </div>
-            <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(32px,4.2vw,52px)', letterSpacing:'-0.02em', color:'var(--text)', margin:0 }}>
+            <h2 style={{ ...sectionHeadingLarge, letterSpacing:'-0.04em', textTransform:'none' }}>
               Posters &amp; Campaign Ads
             </h2>
           </div>
-          <p style={{ fontSize:'14px', color:'var(--text4)', maxWidth:'280px', margin:0, lineHeight:'1.6' }}>
-            Visual content designed for digital platforms — optimised for engagement and brand consistency.
+          <p style={{ ...sectionSubheading }}>
+            Campaign visuals crafted for social platforms, optimized to drive engagement and reinforce brand presence.
           </p>
         </div>
 
@@ -1594,6 +1639,64 @@ function SocialPostersSection() {
           {posterItems.map((item, i) => (
             <PosterCard key={i} item={item} />
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── Social Media Slider (auto-scrolling) ───────────────────────── */
+function SocialSliderSection() {
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const [paused, setPaused] = useState(false)
+
+  const imgs = [
+    mobileUi01Img,
+    mobileUiHomeImg,
+    mobileUi02Img,
+    mobileUiDashboardImg,
+    mobileUiInnerImg,
+    mobileUiOrderCartImg,
+    mobileUiProfileImg,
+    mobileUiLoginImg,
+  ]
+  // duplicate for seamless loop
+  const loopImgs = [...imgs, ...imgs]
+
+  useEffect(() => {
+    if (!trackRef.current) return
+    const el = trackRef.current
+    let rafId: number | null = null
+    let x = 0
+    const speed = 0.4 // pixels per frame
+
+    const step = () => {
+      if (!paused) {
+        x += speed
+        if (x >= el.scrollWidth / 2) x = 0
+        el.scrollLeft = x
+      }
+      rafId = requestAnimationFrame(step)
+    }
+    rafId = requestAnimationFrame(step)
+    return () => { if (rafId !== null) cancelAnimationFrame(rafId) }
+  }, [paused])
+
+  return (
+    <section style={{ background:'var(--bg)', padding:'clamp(40px,6vw,80px) clamp(20px,6vw,80px)' }}>
+      <div style={{ maxWidth:'1320px', margin:'0 auto' }}>
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'18px' }}>
+          <h3 style={{ ...sectionHeadingMedium, lineHeight:1.1, margin:0 }}>Mobile UI Screens</h3>
+        </div>
+
+        <div className="social-slider" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+          <div className="marquee-track" ref={trackRef} style={{ display:'flex', gap:20, alignItems:'center' }}>
+            {loopImgs.map((src, i) => (
+              <div key={i} className="social-card">
+                <img src={src} alt={`social-${i}`} loading="lazy" decoding="async" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -1703,7 +1806,7 @@ function FreelanceSection() {
               <Briefcase size={13} strokeWidth={1.75} style={{ color:'var(--accent)' }}/>
               <span style={{ fontSize:'11px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'var(--accent)' }}>Freelance Work</span>
             </div>
-            <h2 style={{ fontFamily:"'Big Shoulders Display',sans-serif", fontWeight:900, fontSize:'clamp(32px,4.2vw,52px)', letterSpacing:'-0.02em', color:'var(--text)', margin:0 }}>
+            <h2 style={{ ...sectionHeadingMedium }}>
               Independent Projects
             </h2>
           </div>
