@@ -1,0 +1,843 @@
+This is a strong reference. Instead of copying it, use it as inspiration and build your own visual identity. Below is a complete design system that captures the same premium feel while remaining original and suitable for your portfolio. It matches your experience as a UI/UX designer and can be used directly in Figma AI, Cursor, Lovable, or Claude Code.
+
+# Design Style
+
+```
+Style:
+Premium Minimal
+Luxury Dark UI
+Neo Brutal Soft Glass
+Apple × Awwwards × Framer
+Large Typography
+Minimal Colors
+Rounded Corners
+Soft Shadows
+High Contrast
+Floating Cards
+```
+
+---
+
+# Color System
+
+## Background
+
+```
+Primary
+#080808
+
+Secondary
+#101010
+
+Section
+#141414
+
+Card
+#181818
+
+Glass
+rgba(255,255,255,0.04)
+
+Border
+rgba(255,255,255,0.08)
+```
+
+---
+
+## Text
+
+```
+Primary
+#FFFFFF
+
+Secondary
+#D4D4D8
+
+Paragraph
+#9CA3AF
+
+Muted
+#6B7280
+
+Disabled
+#52525B
+```
+
+---
+
+## Accent
+
+```
+Green
+#39FF88
+
+Hover
+#4DFFA0
+
+Glow
+rgba(57,255,136,.45)
+
+Success
+#28F29A
+```
+
+---
+
+## Shadows
+
+```
+0 25px 80px rgba(0,0,0,.55)
+
+0 0 40px rgba(57,255,136,.15)
+
+0 10px 30px rgba(0,0,0,.35)
+```
+
+---
+
+# Typography
+
+## Heading
+
+```
+Clash Display
+
+or
+
+Neue Montreal
+```
+
+Weight
+
+```
+700
+
+800
+```
+
+---
+
+## Body
+
+```
+Satoshi
+
+or
+
+General Sans
+```
+
+Weight
+
+```
+400
+
+500
+```
+
+---
+
+## Numbers
+
+```
+Space Grotesk
+
+Weight 700
+```
+
+---
+
+# Font Sizes
+
+## Hero
+
+```
+Desktop
+
+96px
+
+Line Height
+
+90%
+
+Weight
+
+700
+
+Letter spacing
+
+-5%
+```
+
+---
+
+## Large Heading
+
+```
+64px
+
+Line height
+
+100%
+```
+
+---
+
+## Section
+
+```
+42px
+
+Weight 700
+```
+
+---
+
+## Subheading
+
+```
+24px
+```
+
+---
+
+## Body
+
+```
+18px
+
+Line height
+
+170%
+```
+
+---
+
+## Small
+
+```
+15px
+```
+
+---
+
+# Border Radius
+
+```
+Main Cards
+
+32px
+
+Button
+
+999px
+
+Input
+
+20px
+
+Image
+
+24px
+
+Glass
+
+28px
+```
+
+---
+
+# Stroke
+
+```
+1px
+
+rgba(255,255,255,.08)
+```
+
+Hover
+
+```
+1px
+
+rgba(57,255,136,.40)
+```
+
+---
+
+# Buttons
+
+Primary
+
+```
+Height
+
+56px
+
+Radius
+
+999px
+
+Background
+
+#39FF88
+
+Text
+
+#080808
+
+Weight
+
+600
+```
+
+Hover
+
+```
+Scale
+
+1.03
+
+Glow
+
+Green
+
+Transition
+
+0.4s
+```
+
+---
+
+Secondary
+
+```
+Transparent
+
+Border
+
+1px White
+
+Blur
+
+20px
+```
+
+---
+
+# Navigation
+
+Height
+
+```
+84px
+```
+
+Background
+
+```
+rgba(8,8,8,.60)
+
+Blur
+
+20px
+```
+
+Logo
+
+```
+White
+
+Accent Green
+```
+
+Links
+
+```
+16px
+
+Medium
+```
+
+Active
+
+```
+Green underline
+
+Glow
+```
+
+---
+
+# Hero Layout
+
+```
+LEFT
+
+Available Badge
+
+↓
+
+Huge Heading
+
+↓
+
+Description
+
+↓
+
+Buttons
+
+↓
+
+Client Logos
+
+RIGHT
+
+3D Floating Card
+
+↓
+
+Portrait
+
+↓
+
+Glass Card
+
+↓
+
+Green Orb
+
+↓
+
+Floating Shapes
+```
+
+---
+
+# Card Style
+
+```
+Background
+
+#181818
+
+Radius
+
+32
+
+Border
+
+1px
+
+Glass
+
+Blur
+
+20
+
+Padding
+
+32
+```
+
+Hover
+
+```
+Move up
+
+8px
+
+Border green
+
+Shadow increase
+
+Scale
+
+1.02
+```
+
+---
+
+# Project Cards
+
+Large
+
+```
+Image
+
+70%
+
+Bottom
+
+Title
+
+Category
+
+Arrow
+
+Hover
+
+Zoom image
+
+Reveal overlay
+
+Magnetic cursor
+```
+
+---
+
+# Glass Effect
+
+```
+Background
+
+rgba(255,255,255,.04)
+
+Blur
+
+20
+
+Border
+
+rgba(255,255,255,.08)
+
+Shadow
+
+Soft
+```
+
+---
+
+# Grid
+
+```
+12 Columns
+
+Container
+
+1320px
+
+Margin
+
+120px
+
+Gap
+
+32px
+```
+
+---
+
+# Spacing
+
+```
+Section
+
+160px
+
+Card
+
+40px
+
+Text
+
+24px
+
+Button
+
+20px
+```
+
+---
+
+# Icons
+
+```
+Lucide
+
+Feather
+
+Phosphor
+
+Size
+
+22
+
+Stroke
+
+1.75
+```
+
+---
+
+# Images
+
+```
+Rounded
+
+24px
+
+Contrast
+
+High
+
+Slight Grain
+
+Dark Overlay
+
+5%
+```
+
+---
+
+# Background Effects
+
+```
+Noise
+
+Mesh Gradient
+
+Green Glow
+
+Glass Blur
+
+Soft Vignette
+
+Radial Gradient
+
+Tiny Grid
+```
+
+---
+
+# Motion
+
+```
+GSAP
+
+Framer Motion
+
+Lenis
+
+Split Text
+
+Mouse Follow
+
+Parallax
+
+Image Reveal
+
+Cursor Blob
+
+Section Fade
+
+Scale
+
+Blur Reveal
+
+Counter
+
+Marquee
+```
+
+---
+
+# Hover Effects
+
+```
+Button Glow
+
+Border Glow
+
+Card Lift
+
+Image Zoom
+
+Magnetic Button
+
+Cursor Expand
+
+Gradient Border
+
+Icon Rotate
+
+Number Count
+
+Underline Animation
+```
+
+---
+
+# Figma Effects
+
+```
+Drop Shadow
+
+Y
+
+20
+
+Blur
+
+60
+
+Opacity
+
+18%
+```
+
+---
+
+Glass
+
+```
+Fill
+
+4%
+
+Blur
+
+24
+
+Stroke
+
+8%
+```
+
+---
+
+# UI Components
+
+```
+Glass Navbar
+
+Hero
+
+Availability Badge
+
+Stats
+
+Project Card
+
+Testimonial
+
+Timeline
+
+Skill Card
+
+Experience Card
+
+Contact Form
+
+Footer
+```
+
+---
+
+# Figma Variables
+
+```
+Primary
+#080808
+
+Secondary
+#181818
+
+Accent
+#39FF88
+
+Text
+#FFFFFF
+
+Gray
+#A1A1AA
+
+Border
+rgba(255,255,255,.08)
+
+Radius XL
+32
+
+Radius L
+24
+
+Radius M
+20
+
+Radius Button
+999
+
+Spacing
+8
+
+16
+
+24
+
+32
+
+48
+
+64
+
+96
+
+120
+```
+
+# Complete AI Prompt
+
+```text
+Design a premium award-winning UI/UX portfolio for Yogesh Waran inspired by modern luxury product websites.
+
+Visual Direction:
+- Minimal dark interface
+- Apple-quality spacing
+- Awwwards-level presentation
+- Glassmorphism with subtle blur
+- Soft green accent (#39FF88)
+- Large editorial typography
+- High contrast
+- Floating cards
+- Rounded 32px corners
+- Thin 1px translucent borders
+- Premium motion-first layout
+- Cinematic lighting
+- Soft grain texture
+- Interactive storytelling
+
+Typography:
+- Clash Display / Neue Montreal for headings
+- Satoshi / General Sans for body
+- Space Grotesk for statistics
+
+Layout:
+- Full-screen hero
+- Sticky glass navigation
+- Featured case studies
+- Experience timeline
+- Design process
+- Skills
+- Testimonials
+- Contact section
+- Minimal footer
+
+Effects:
+- Mesh gradient background
+- Green glow highlights
+- Glass panels
+- Mouse spotlight
+- Magnetic buttons
+- Smooth scroll
+- GSAP ScrollTrigger
+- Framer Motion animations
+- 3D hover tilt
+- Image reveal
+- Infinite marquee
+- Animated counters
+
+The final result should feel elegant, premium, responsive, recruiter-friendly, and original rather than a clone of any existing portfolio.
+```
+
+This design language will give your portfolio a polished, high-end appearance while keeping it distinct from the reference you shared.

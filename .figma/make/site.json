@@ -1,0 +1,10 @@
+{
+  "description": "Create and showcase a professional portfolio to highlight your skills and projects, enhancing your personal brand and career opportunities.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
