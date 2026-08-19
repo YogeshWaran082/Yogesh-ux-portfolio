@@ -7,7 +7,7 @@ import {
   ChevronRight, ExternalLink, Link2, GitBranch,
   Sun, Moon, Users, LayoutGrid,
 } from 'lucide-react'
-import { useSound } from './useSound'
+import { useSound, playSound } from './useSound'
 
 /* ── Asset imports ─────────────────────────────────────────────────── */
 import evChargingImg  from '@/imports/webp/ev-charging.webp'
@@ -694,7 +694,10 @@ export default function App() {
             </button>
 
             {/* Toggle */}
-            <button className="theme-toggle" onClick={() => setDark(!dark)} aria-label="Toggle theme">
+            <button className="theme-toggle" onClick={() => {
+              setDark(!dark)
+              sound.play('click')
+            }} aria-label="Toggle theme">
               <div className="theme-thumb" style={{ left: dark ? '3px' : '27px', display:'flex', alignItems:'center', justifyContent:'center' }}>
                 {dark ? <Moon size={12} strokeWidth={2} color="var(--accent-fg)"/> : <Sun size={12} strokeWidth={2} color="var(--accent-fg)"/>}
               </div>
@@ -703,6 +706,7 @@ export default function App() {
             {/* View Resume */}
             <a href={resumePdf as unknown as string} download="YogeshWaran-Resume.pdf"
               className="hidden md:inline-flex"
+              onClick={() => sound.play('click')}
               style={{
                 alignItems: 'center', gap: '6px',
                 padding: '10px 24px', borderRadius: '9999px', fontSize: '14px', fontWeight: 500,
@@ -712,11 +716,17 @@ export default function App() {
               }}
               onMouseMove={magneticPointer}
               onMouseLeave={resetMagnetic}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--text)'; }}
+              onMouseEnter={e => {
+                sound.play('hover')
+                ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--text)'
+              }}
             >View Resume</a>
 
             {/* Hamburger */}
-            <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}
+            <button className="md:hidden" onClick={() => {
+              setMenuOpen(!menuOpen)
+              sound.play('click')
+            }}
               style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '5px', padding: '4px' }}>
               {[0,1,2].map(i => (
                 <span key={i} style={{
@@ -1321,9 +1331,12 @@ function IndependentProjectsSection() {
 function IndependentCard({ p }: { p: typeof independentProjects[0] }) {
   const [hovered, setHovered] = useState(false)
   return (
-    <LinkCardWrapper href={behanceUrl} style={{ borderRadius:'28px', overflow:'hidden', display:'block' }}>
+    <LinkCardWrapper href={behanceUrl} style={{ borderRadius:'28px', overflow:'hidden', display:'block' }} onClick={() => playSound('project-open')}>
       <div
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={() => {
+          setHovered(true)
+          playSound('hover')
+        }}
         onMouseLeave={() => setHovered(false)}
         style={{
           borderRadius:'28px', overflow:'hidden', cursor:'pointer',
@@ -1742,9 +1755,12 @@ function PosterCard({ item }: { item: typeof posterItems[0] }) {
   const link = item.platform.toLowerCase().includes('instagram') || item.platform.toLowerCase().includes('facebook') || item.platform.toLowerCase().includes('linkedin') ? instagramUrl : behanceUrl
 
   return (
-    <LinkCardWrapper href={link} style={{ borderRadius:'24px', overflow:'hidden', display:'block' }}>
+    <LinkCardWrapper href={link} style={{ borderRadius:'24px', overflow:'hidden', display:'block' }} onClick={() => playSound('project-open')}>
       <div
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={() => {
+          setHovered(true)
+          playSound('hover')
+        }}
         onMouseLeave={() => setHovered(false)}
         style={{
           borderRadius:'24px', overflow:'hidden', cursor:'pointer',
@@ -1868,7 +1884,11 @@ function FreelanceRow({ item, last }: { item: typeof freelanceItems[0]; last: bo
   const [hovered, setHovered] = useState(false)
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
+      onClick={() => playSound('project-open')}
+      onMouseEnter={() => {
+        setHovered(true)
+        playSound('hover')
+      }}
       onMouseLeave={() => setHovered(false)}
       style={{
         display:'grid', gridTemplateColumns:'200px 1fr auto', gap:'32px', alignItems:'center',
