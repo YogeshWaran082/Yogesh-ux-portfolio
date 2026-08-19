@@ -571,17 +571,13 @@ body {
   }
 }
 
-/* ── Cyberpunk: moving grid ───────────────────────────────────────── */
-@keyframes grid-move {
-  from { background-position: 0 0; }
-  to   { background-position: 0 60px; }
-}
+/* ── Cyberpunk: static GPU grid ──────────────────────────────────── */
 .cyber-grid {
   background-image:
-    linear-gradient(color-mix(in srgb, var(--accent) 8%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--accent) 8%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--accent) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 6%, transparent) 1px, transparent 1px);
   background-size: 60px 60px;
-  animation: grid-move 8s linear infinite;
+  transform: translateZ(0);
 }
 
 /* ── Scanlines ────────────────────────────────────────────────────── */

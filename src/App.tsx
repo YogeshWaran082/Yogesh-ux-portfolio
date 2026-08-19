@@ -497,19 +497,57 @@ function useReveal() {
   return { ref, visible }
 }
 
+/* ── Zero-re-render Scroll Progress Bar ────────────────────────────── */
+function ScrollProgressIndicator({ dark }: { dark: boolean }) {
+  const barRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    let ticking = false
+    const updateProgress = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (barRef.current) {
+            const max = document.documentElement.scrollHeight - window.innerHeight
+            const progress = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0
+            barRef.current.style.width = `${progress}%`
+          }
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    updateProgress()
+    window.addEventListener('scroll', updateProgress, { passive: true })
+    return () => window.removeEventListener('scroll', updateProgress)
+  }, [])
+
+  return (
+    <div style={{ position: 'fixed', inset: '0 auto auto 0', width: '100%', height: '2px', background: 'rgba(255,255,255,0.08)', zIndex: 60, pointerEvents: 'none' }}>
+      <div
+        ref={barRef}
+        style={{
+          width: '0%',
+          height: '100%',
+          background: dark ? '#39FF88' : '#059669',
+          boxShadow: dark ? '0 0 18px rgba(57,255,136,0.4)' : '0 0 18px rgba(5,150,105,0.25)',
+          willChange: 'width',
+        }}
+      />
+    </div>
+  )
+}
+
 /* ── App ───────────────────────────────────────────────────────────── */
 export default function App() {
   const [dark, setDark] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
   const [booting, setBooting] = useState(true)
-  const [scrollY, setScrollY] = useState(0)
-  const [scrollProgress, setScrollProgress] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
   const workRef = useRef<HTMLElement>(null)
-  const audioCtxRef = useRef<AudioContext | null>(null)
-  const ambientGainRef = useRef<GainNode | null>(null)
   const [workVisible, setWorkVisible] = useState(false)
+  const lenisRef = useRef<Lenis | null>(null)
   
   // Sound system
   const sound = useSound()
@@ -546,19 +584,6 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      const progress = max > 0 ? (window.scrollY / max) * 100 : 0
-      setScrollProgress(progress)
-      setScrollY(window.scrollY)
-    }
-
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
     const workObs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setWorkVisible(true) }, { threshold: 0.15 })
     if (workRef.current) workObs.observe(workRef.current)
 
@@ -579,8 +604,6 @@ export default function App() {
     }
   }, [])
 
-  const lenisRef = useRef<Lenis | null>(null)
-
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
     document.body.dataset.theme = dark ? 'dark' : 'light'
@@ -589,14 +612,17 @@ export default function App() {
   useEffect(() => {
     if (reducedMotion) return
 
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: isTouch ? 0.9 : 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
+      syncTouch: false,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.2,
+      touchMultiplier: 1.0,
     })
 
     lenisRef.current = lenis
@@ -620,7 +646,7 @@ export default function App() {
     const target = document.getElementById(id)
     if (target) {
       if (lenisRef.current) {
-        lenisRef.current.scrollTo(target, { offset: -74, duration: 1.15 })
+        lenisRef.current.scrollTo(target, { offset: -74, duration: 1.1 })
       } else {
         const top = target.getBoundingClientRect().top + window.scrollY - 74
         window.scrollTo({ top, behavior: reducedMotion ? 'auto' : 'smooth' })
@@ -629,25 +655,17 @@ export default function App() {
     setMenuOpen(false)
   }
 
-  const toggleSound = () => {
-    const newState = !soundOn
-    setSoundOn(newState)
-    sound.setEnabled(newState)
-  }
-
   // Sync sound state with hook
   useEffect(() => {
     setSoundOn(sound.isEnabled)
   }, [sound.isEnabled])
 
   return (
-    <div data-theme={dark ? 'dark' : 'light'} style={{ overflowX: 'hidden', cursor: 'none' }}>
+    <div data-theme={dark ? 'dark' : 'light'} style={{ overflowX: 'hidden', cursor: isMobile ? 'auto' : 'none' }}>
       {booting && <BootScreen onDone={() => setBooting(false)} />}
       {!isMobile && <CyberpunkCursor />}
       <CyberBackground dark={dark} />
-      <div style={{ position: 'fixed', inset: '0 auto auto 0', width: '100%', height: '2px', background: 'rgba(255,255,255,0.08)', zIndex: 60, pointerEvents: 'none' }}>
-        <div style={{ width: `${scrollProgress}%`, height: '100%', background: dark ? '#39FF88' : '#059669', boxShadow: dark ? '0 0 18px rgba(57,255,136,0.4)' : '0 0 18px rgba(5,150,105,0.25)', transition: 'width 0.12s linear' }} />
-      </div>
+      <ScrollProgressIndicator dark={dark} />
 
       {/* ── Navbar ─────────────────────────────────────────────── */}
       <nav style={{
