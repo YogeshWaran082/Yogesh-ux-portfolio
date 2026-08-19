@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
       ? `${process.env.FIGMA_PUBLIC_URL}/`
       : mode === 'development'
         ? '/'
-        : './',
+        : '/',
     build: {
       sourcemap: emitSourcemaps ? 'inline' : false,
       minify: !emitSourcemaps,
