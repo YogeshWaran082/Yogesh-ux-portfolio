@@ -71,6 +71,38 @@ function InstagramIcon({ size = 16, strokeWidth = 1.75 }: { size?: number; strok
   )
 }
 
+function SoundOffIcon({ size = 20, color = 'currentColor' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_4418_8012)">
+        <path d="M22 12.75H18C17.59 12.75 17.25 12.41 17.25 12C17.25 11.59 17.59 11.25 18 11.25H22C22.41 11.25 22.75 11.59 22.75 12C22.75 12.41 22.41 12.75 22 12.75Z" fill={color} />
+        <path d="M14.02 3.77972C12.9 3.15972 11.47 3.31972 10.01 4.22972L7.09 6.05972C6.89 6.17972 6.66 6.24972 6.43 6.24972H5.5H5C2.58 6.24972 1.25 7.57972 1.25 9.99972V13.9997C1.25 16.4197 2.58 17.7497 5 17.7497H5.5H6.43C6.66 17.7497 6.89 17.8197 7.09 17.9397L10.01 19.7697C10.89 20.3197 11.75 20.5897 12.55 20.5897C13.07 20.5897 13.57 20.4697 14.02 20.2197C15.13 19.5997 15.75 18.3097 15.75 16.5897V7.40972C15.75 5.68972 15.13 4.39972 14.02 3.77972Z" fill={color} />
+      </g>
+      <defs>
+        <clipPath id="clip0_4418_8012">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+function SoundOnIcon({ size = 20, color = 'currentColor' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_4418_8014)">
+        <path d="M19.3301 16.7503C19.1701 16.7503 19.0201 16.7003 18.8801 16.6003C18.5501 16.3503 18.4801 15.8803 18.7301 15.5503C20.3001 13.4603 20.3001 10.5403 18.7301 8.45027C18.4801 8.12027 18.5501 7.65027 18.8801 7.40027C19.2101 7.15027 19.6801 7.22027 19.9301 7.55027C21.9001 10.1703 21.9001 13.8303 19.9301 16.4503C19.7901 16.6503 19.5601 16.7503 19.3301 16.7503Z" fill={color} />
+        <path d="M15.3501 3.77972C14.2301 3.15972 12.8001 3.31972 11.3401 4.22972L8.42008 6.05972C8.22008 6.17972 7.99008 6.24972 7.76008 6.24972H6.83008H6.33008C3.91008 6.24972 2.58008 7.57972 2.58008 9.99972V13.9997C2.58008 16.4197 3.91008 17.7497 6.33008 17.7497H6.83008H7.76008C7.99008 17.7497 8.22008 17.8197 8.42008 17.9397L11.3401 19.7697C12.2201 20.3197 13.0801 20.5897 13.8801 20.5897C14.4001 20.5897 14.9001 20.4697 15.3501 20.2197C16.4601 19.5997 17.0801 18.3097 17.0801 16.5897V7.40972C17.0801 5.68972 16.4601 4.39972 15.3501 3.77972Z" fill={color} />
+      </g>
+      <defs>
+        <clipPath id="clip0_4418_8014">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
 /* ── Data ──────────────────────────────────────────────────────────── */
 const projects = [
   {
@@ -717,33 +749,33 @@ export default function App() {
                 sound.setEnabled(newState)
                 if (newState) sound.play('click')
               }}
+              aria-label={soundOn ? 'Mute sound' : 'Unmute sound'}
+              title={soundOn ? 'Sound On' : 'Sound Off'}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                borderRadius: '9999px',
-                padding: '7px 12px',
-                fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
+                justifyContent: 'center',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
                 background: soundOn ? 'var(--accent-bg)' : 'transparent',
                 border: soundOn ? '1px solid var(--accent-border)' : '1px solid var(--border)',
                 color: soundOn ? 'var(--accent)' : 'var(--text2)',
                 transition: 'all 0.2s ease',
                 cursor: 'pointer',
+                padding: 0,
+                flexShrink: 0,
+              }}
+              onMouseEnter={e => {
+                ;(e.currentTarget as HTMLElement).style.borderColor = soundOn ? 'var(--accent)' : 'var(--text)'
+                ;(e.currentTarget as HTMLElement).style.color = soundOn ? 'var(--accent)' : 'var(--text)'
+              }}
+              onMouseLeave={e => {
+                ;(e.currentTarget as HTMLElement).style.borderColor = soundOn ? 'var(--accent-border)' : 'var(--border)'
+                ;(e.currentTarget as HTMLElement).style.color = soundOn ? 'var(--accent)' : 'var(--text2)'
               }}
             >
-              <span
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  background: soundOn ? 'var(--accent)' : 'var(--text4)',
-                  boxShadow: soundOn ? '0 0 8px var(--accent)' : 'none',
-                }}
-              />
-              <span className="hidden sm:inline">{soundOn ? 'Sound On' : 'Sound Off'}</span>
+              {soundOn ? <SoundOnIcon size={18} /> : <SoundOffIcon size={18} />}
             </button>
 
             {/* Theme Toggle */}
@@ -841,15 +873,16 @@ export default function App() {
                 sound.setEnabled(next)
                 if (next) sound.play('click')
               }}
+              aria-label={soundOn ? 'Mute sound' : 'Unmute sound'}
               style={{
-                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                 padding: '14px 20px', borderRadius: '9999px', fontSize: '13px', fontWeight: 600,
                 background: soundOn ? 'var(--accent-bg)' : 'var(--card)',
                 border: soundOn ? '1px solid var(--accent-border)' : '1px solid var(--border)',
                 color: soundOn ? 'var(--accent)' : 'var(--text2)',
               }}
             >
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: soundOn ? 'var(--accent)' : 'var(--text4)' }} />
+              {soundOn ? <SoundOnIcon size={18} /> : <SoundOffIcon size={18} />}
               {soundOn ? 'Sound On' : 'Sound Off'}
             </button>
           </div>
