@@ -1,5 +1,5 @@
-// cache-bust
 import React, { useState, useEffect, useRef } from 'react'
+import Lenis from 'lenis'
 import {
   Mail, Phone, MapPin, Globe,
   ArrowUpRight, Download, ArrowUp, Award, Briefcase,
@@ -579,18 +579,53 @@ export default function App() {
     }
   }, [])
 
+  const lenisRef = useRef<Lenis | null>(null)
+
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
     document.body.dataset.theme = dark ? 'dark' : 'light'
   }, [dark])
 
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = reducedMotion ? 'auto' : 'smooth'
+    if (reducedMotion) return
+
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.2,
+    })
+
+    lenisRef.current = lenis
+    ;(window as unknown as { lenis: Lenis }).lenis = lenis
+
+    let rafId: number
+    function raf(time: number) {
+      lenis.raf(time)
+      rafId = requestAnimationFrame(raf)
+    }
+    rafId = requestAnimationFrame(raf)
+
+    return () => {
+      cancelAnimationFrame(rafId)
+      lenis.destroy()
+      lenisRef.current = null
+    }
   }, [reducedMotion])
 
   const scrollTo = (id: string) => {
     const target = document.getElementById(id)
-    target?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start', inline: 'nearest' })
+    if (target) {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(target, { offset: -74, duration: 1.15 })
+      } else {
+        const top = target.getBoundingClientRect().top + window.scrollY - 74
+        window.scrollTo({ top, behavior: reducedMotion ? 'auto' : 'smooth' })
+      }
+    }
     setMenuOpen(false)
   }
 
