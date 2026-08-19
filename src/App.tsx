@@ -1172,7 +1172,6 @@ export default function App() {
               {[
                 { Icon: Mail as React.ElementType,           label:'yogeshwaran.ux@gmail.com',                href:'mailto:yogeshwaran.ux@gmail.com' },
                 { Icon: Phone as React.ElementType,          label:'+91 6382701502',                          href:'https://wa.me/916382701502' },
-                { Icon: Globe as React.ElementType,          label:'yogesh-ux-designer-portfolio.vercel.app', href:'https://yogesh-ux-designer-portfolio.vercel.app' },
                 { Icon: Link2 as React.ElementType,          label:'linkedin.com/in/m-yogesh-waran',          href:'https://linkedin.com/in/m-yogesh-waran-b303a7282' },
                 { Icon: Globe as React.ElementType,          label:'behance.net/yogeshwaranUIUX01',           href:'https://www.behance.net/yogeshwaranUIUX01' },
                 { Icon: GithubIcon as React.ElementType,         label:'github.com/YogeshWaran082',               href:'https://github.com/YogeshWaran082' },
@@ -1239,7 +1238,6 @@ export default function App() {
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'16px', paddingTop:'24px', borderTop:`1px solid var(--footer-div)` }}>
             <div style={{ display:'flex', gap:'10px', flexWrap:'wrap' }}>
               {([
-                { label:'Portfolio', Icon: Globe as React.ElementType,         href:'https://yogesh-ux-designer-portfolio.vercel.app' },
                 { label:'LinkedIn',  Icon: Link2 as React.ElementType,         href:'https://linkedin.com/in/m-yogesh-waran-b303a7282' },
                 { label:'Behance',   Icon: Globe as React.ElementType,         href:'https://www.behance.net/yogeshwaranUIUX01' },
                 { label:'GitHub',    Icon: GithubIcon as React.ElementType,        href:'https://github.com/YogeshWaran082' },
