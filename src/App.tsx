@@ -656,22 +656,40 @@ export default function App() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto', flexShrink: 0 }}>
             <button
               type="button"
-              onClick={toggleSound}
+              onClick={() => {
+                const newState = !soundOn
+                setSoundOn(newState)
+                sound.setEnabled(newState)
+                if (newState) sound.play('click')
+              }}
               onMouseMove={magneticPointer}
               onMouseLeave={resetMagnetic}
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
                 borderRadius: '9999px',
-                padding: '10px 14px',
+                padding: '9px 15px',
                 fontSize: '11px',
                 fontWeight: 600,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                background: 'transparent',
-                border: '1px solid var(--border)',
-                color: 'var(--text2)',
+                background: soundOn ? 'var(--accent-bg)' : 'transparent',
+                border: soundOn ? '1px solid var(--accent-border)' : '1px solid var(--border)',
+                color: soundOn ? 'var(--accent)' : 'var(--text2)',
                 transition: 'all 0.2s ease',
+                cursor: 'pointer',
               }}
             >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: soundOn ? 'var(--accent)' : 'var(--text4)',
+                  boxShadow: soundOn ? '0 0 8px var(--accent)' : 'none',
+                }}
+              />
               {soundOn ? 'Sound On' : 'Sound Off'}
             </button>
 
