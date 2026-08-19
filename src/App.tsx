@@ -617,7 +617,7 @@ export default function App() {
       {/* ── Navbar ─────────────────────────────────────────────── */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        height: '84px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        height: '74px', display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: 'var(--nav-bg)',
         backdropFilter: 'blur(22px)', WebkitBackdropFilter: 'blur(22px)',
         borderBottom: '1px solid var(--divider)',
@@ -630,11 +630,12 @@ export default function App() {
           height: '100%',
           display: 'flex',
           alignItems: 'center',
-          padding: '0 clamp(20px, 5vw, 64px)',
-          gap: '54px',
+          justifyContent: 'space-between',
+          padding: '0 clamp(16px, 4vw, 48px)',
+          gap: '12px',
         }}>
           {/* Logo */}
-          <div style={{ display:'flex', alignItems:'center', minWidth: 'auto', flexShrink: 0 }}>
+          <div style={{ display:'flex', alignItems:'center', flexShrink: 0 }}>
             <BrandWordmark dark={dark} />
           </div>
 
@@ -653,7 +654,8 @@ export default function App() {
           </div>
 
           {/* Controls - Right aligned */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto', flexShrink: 0 }}>
+            {/* Sound Toggle */}
             <button
               type="button"
               onClick={() => {
@@ -662,17 +664,15 @@ export default function App() {
                 sound.setEnabled(newState)
                 if (newState) sound.play('click')
               }}
-              onMouseMove={magneticPointer}
-              onMouseLeave={resetMagnetic}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '7px',
+                gap: '6px',
                 borderRadius: '9999px',
-                padding: '9px 15px',
+                padding: '7px 12px',
                 fontSize: '11px',
                 fontWeight: 600,
-                letterSpacing: '0.08em',
+                letterSpacing: '0.06em',
                 textTransform: 'uppercase',
                 background: soundOn ? 'var(--accent-bg)' : 'transparent',
                 border: soundOn ? '1px solid var(--accent-border)' : '1px solid var(--border)',
@@ -690,10 +690,10 @@ export default function App() {
                   boxShadow: soundOn ? '0 0 8px var(--accent)' : 'none',
                 }}
               />
-              {soundOn ? 'Sound On' : 'Sound Off'}
+              <span className="hidden sm:inline">{soundOn ? 'Sound On' : 'Sound Off'}</span>
             </button>
 
-            {/* Toggle */}
+            {/* Theme Toggle */}
             <button className="theme-toggle" onClick={() => {
               setDark(!dark)
               sound.play('click')
@@ -703,36 +703,36 @@ export default function App() {
               </div>
             </button>
 
-            {/* View Resume */}
+            {/* View Resume Button (Desktop) */}
             <a href={resumePdf as unknown as string} download="YogeshWaran-Resume.pdf"
               className="hidden md:inline-flex"
               onClick={() => sound.play('click')}
               style={{
                 alignItems: 'center', gap: '6px',
-                padding: '10px 24px', borderRadius: '9999px', fontSize: '14px', fontWeight: 500,
+                padding: '8px 18px', borderRadius: '9999px', fontSize: '13px', fontWeight: 600,
                 background: 'transparent', color: 'var(--text)', textDecoration: 'none',
                 border: '1px solid var(--border)',
                 transition: 'border-color 0.2s, color 0.2s',
               }}
-              onMouseMove={magneticPointer}
-              onMouseLeave={resetMagnetic}
               onMouseEnter={e => {
                 sound.play('hover')
                 ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--text)'
               }}
-            >View Resume</a>
+            >Resume</a>
 
-            {/* Hamburger */}
+            {/* Hamburger Button (Mobile) */}
             <button className="md:hidden" onClick={() => {
               setMenuOpen(!menuOpen)
               sound.play('click')
             }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '5px', padding: '4px' }}>
+              aria-label="Open menu"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '5px', padding: '6px', minWidth: '38px', minHeight: '38px', alignItems: 'center', justifyContent: 'center' }}>
               {[0,1,2].map(i => (
                 <span key={i} style={{
-                  display: 'block', height: '1.5px', width: '22px', background: 'var(--text)',
+                  display: 'block', height: '2px', width: '20px', background: 'var(--text)',
+                  borderRadius: '2px',
                   transition: 'all 0.3s',
-                  transform: menuOpen ? (i===0?'rotate(45deg) translateY(6.5px)': i===2?'rotate(-45deg) translateY(-6.5px)':'scaleX(0)') : 'none',
+                  transform: menuOpen ? (i===0?'rotate(45deg) translateY(5px)': i===2?'rotate(-45deg) translateY(-5px)':'scaleX(0)') : 'none',
                 }}/>
               ))}
             </button>
@@ -804,7 +804,7 @@ export default function App() {
       )}
 
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <section id="home" className="hero-section hero-reveal" style={{ position: 'relative', overflow: 'hidden', paddingTop: 'clamp(84px, 12vw, 110px)', minHeight: '100vh', height: 'auto', paddingBottom: 'clamp(40px, 6vw, 80px)', background: dark ? '#050505' : '#f3f3f1' }}>
+      <section id="home" className="hero-section hero-reveal" style={{ position: 'relative', overflow: 'hidden', paddingTop: 'clamp(84px, 12vw, 100px)', minHeight: 'auto', height: 'auto', paddingBottom: 'clamp(40px, 6vw, 80px)', background: dark ? '#050505' : '#f3f3f1' }}>
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1 }}>
           <div style={{ position: 'absolute', top: '-12%', left: '8%', width: '420px', height: '420px', borderRadius: '50%', background: dark ? 'radial-gradient(circle, rgba(57,255,136,0.12) 0%, transparent 55%)' : 'radial-gradient(circle, rgba(5,150,105,0.12) 0%, transparent 55%)' }} />
           <div style={{ position: 'absolute', bottom: '-8%', right: '8%', width: '320px', height: '320px', borderRadius: '50%', background: dark ? 'radial-gradient(circle, rgba(57,255,136,0.08) 0%, transparent 65%)' : 'radial-gradient(circle, rgba(5,150,105,0.08) 0%, transparent 65%)' }} />
@@ -816,13 +816,13 @@ export default function App() {
               fontFamily: "'Big Shoulders Display',sans-serif",
               fontWeight: 900,
               margin: 0,
-              paddingTop: 'clamp(16px, 3vw, 32px)',
-              fontSize: 'clamp(46px, 12.5vw, 185px)',
+              paddingTop: 'clamp(12px, 2.5vw, 28px)',
+              fontSize: 'clamp(42px, 12vw, 185px)',
               lineHeight: '0.92',
               letterSpacing: 'clamp(-1px, -0.02em, -3px)',
               color: dark ? '#f5f5f5' : '#111111',
               textTransform: 'uppercase',
-              textAlign: 'left',
+              textAlign: 'center',
               wordBreak: 'break-word',
               width: '100%',
               opacity: 0,
@@ -832,8 +832,9 @@ export default function App() {
               YOGESH WARAN
             </div>
 
-            <div className="hero-grid" style={{ alignItems: 'end', marginTop: '0', columnGap: '0px', rowGap: '0px', marginLeft: '0', marginRight: '0' }}>
-              <div className="hero-left" style={{ marginTop: 'auto', alignSelf: 'end', paddingBottom: '0', marginLeft: '0', opacity: 0, animation: reducedMotion ? 'none' : 'heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards', animationDelay: '0.2s' }}>
+            {/* Desktop Hero Grid (>= 960px) */}
+            <div className="hidden lg:grid hero-grid" style={{ alignItems: 'end', marginTop: '0', columnGap: '0px', rowGap: '0px' }}>
+              <div className="hero-left" style={{ marginTop: 'auto', alignSelf: 'end', paddingBottom: '0', opacity: 0, animation: reducedMotion ? 'none' : 'heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards', animationDelay: '0.2s' }}>
                 <span className="hero-label hero-label-left" style={{ letterSpacing: '0.12em', transform: 'skewY(-4deg)' }}>PRODUCT</span>
                 <div className="hero-badge" style={{
                   width: 'fit-content',
@@ -845,7 +846,6 @@ export default function App() {
                   fontSize: '13px',
                   lineHeight: '1',
                   fontWeight: 500,
-                  letterSpacing: '0',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '10px'
@@ -857,66 +857,41 @@ export default function App() {
                   Hey there! I'm a Brand & UI & UX Designer working in the global marketplace.
                 </p>
                 <div className="hero-actions" style={{ gap: '18px', alignItems: 'center' }}>
-                  <button onClick={() => scrollTo('contact')} className="hero-button-primary" style={{
-                    borderRadius: '9999px',
-                    minWidth: '168px',
-                    padding: '16px 28px',
-                    fontSize: '18px',
-                    fontWeight: 700,
-                    lineHeight: '1',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    background: '#f5f5f5',
-                    color: '#050505',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                  <button onClick={() => { scrollTo('contact'); sound.play('click') }} className="hero-button-primary" style={{
+                    borderRadius: '9999px', minWidth: '168px', padding: '16px 28px', fontSize: '18px', fontWeight: 700, lineHeight: '1',
+                    border: '1px solid rgba(255,255,255,0.2)', background: '#f5f5f5', color: '#050505', display: 'inline-flex', alignItems: 'center', justifyContent: 'center'
                   }}>
                     Schedule Call
                   </button>
-                  <a href={resumePdf as unknown as string} download="YogeshWaran-Resume.pdf" className="hero-button-secondary" style={{
-                    borderRadius: '9999px',
-                    minWidth: '168px',
-                    padding: '16px 28px',
-                    fontSize: '18px',
-                    fontWeight: 700,
-                    lineHeight: '1',
-                    border: dark ? '1px solid rgba(255,255,255,0.35)' : '1px solid rgba(17,17,17,0.18)',
-                    background: dark ? 'rgba(255,255,255,0.02)' : 'rgba(17,17,17,0.03)',
-                    color: dark ? '#f5f5f5' : '#111111',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                  <a href={resumePdf as unknown as string} download="YogeshWaran-Resume.pdf" onClick={() => sound.play('click')} className="hero-button-secondary" style={{
+                    borderRadius: '9999px', minWidth: '168px', padding: '16px 28px', fontSize: '18px', fontWeight: 700, lineHeight: '1',
+                    border: dark ? '1px solid rgba(255,255,255,0.35)' : '1px solid rgba(17,17,17,0.18)', background: dark ? 'rgba(255,255,255,0.02)' : 'rgba(17,17,17,0.03)', color: dark ? '#f5f5f5' : '#111111', display: 'inline-flex', alignItems: 'center', justifyContent: 'center'
                   }}>
                     <Download size={14} strokeWidth={1.75} /> Resume
                   </a>
                 </div>
               </div>
 
-              <div className="hero-center" style={{ position: 'relative', alignSelf: 'end', marginLeft: '0', marginRight: '0', marginTop: '-12px', opacity: 0, animation: reducedMotion ? 'none' : 'heroReveal 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards', animationDelay: '0.34s' }}>
+              <div className="hero-center" style={{ position: 'relative', alignSelf: 'end', marginTop: '-12px', opacity: 0, animation: reducedMotion ? 'none' : 'heroReveal 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards', animationDelay: '0.34s' }}>
                 <div style={{
-                  position: 'absolute',
-                  inset: '-18% -22% -12% -22%',
+                  position: 'absolute', inset: '-18% -22% -12% -22%',
                   background: 'radial-gradient(ellipse at center, rgba(57,255,136,0.54) 0%, rgba(57,255,136,0.28) 18%, rgba(57,255,136,0.12) 34%, rgba(57,255,136,0.04) 54%, rgba(57,255,136,0) 72%)',
-                  filter: 'blur(26px)',
-                  pointerEvents: 'none',
-                  zIndex: 0,
+                  filter: 'blur(26px)', pointerEvents: 'none', zIndex: 0,
                 }} />
                 <div className="hero-portrait-frame" style={{
-                  position: 'relative',
-                  zIndex: 1,
+                  position: 'relative', zIndex: 1,
                   background: 'linear-gradient(180deg, rgba(83,217,165,0.32) 0%, rgba(83,217,165,0.10) 42%, rgba(83,217,165,0.18) 100%)',
                   boxShadow: '0 0 0 1px rgba(83,217,165,0.14), 0 0 90px rgba(57,255,136,0.22), 0 30px 80px rgba(0,0,0,0.3)',
                   transform: `translate3d(0, ${reducedMotion ? 0 : scrollY * -0.03}px, 0) translateY(-18px) scale(${reducedMotion ? 1 : 0.98})`,
-                  opacity: 1,
                 }}>
                   <img src={heroPortraitImg} alt="Yogesh Waran portrait" />
                 </div>
               </div>
 
-              <div className="hero-right" style={{ marginTop: 'auto', alignSelf: 'end', paddingBottom: '0', marginRight: '0', opacity: 0, animation: reducedMotion ? 'none' : 'heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards', animationDelay: '0.42s' }}>
+              <div className="hero-right" style={{ marginTop: 'auto', alignSelf: 'end', paddingBottom: '0', opacity: 0, animation: reducedMotion ? 'none' : 'heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards', animationDelay: '0.42s' }}>
                 <span className="hero-label hero-label-right" style={{ letterSpacing: '0.12em', transform: 'skewY(-4deg)' }}>DESIGNER</span>
                 <div className="hero-right-spacer" />
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '13px', letterSpacing: '0.04em', textTransform: 'none', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '13px', marginBottom: '8px' }}>
                   <MapPin size={12} strokeWidth={1.8} />
                   <span>Chennai, India</span>
                 </div>
@@ -932,6 +907,136 @@ export default function App() {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+
+            {/* Mobile / Tablet Hero Flow (< 960px) */}
+            <div className="flex lg:hidden flex-col items-center text-center" style={{ gap: '16px', marginTop: '12px', width: '100%' }}>
+              {/* Badge */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                borderRadius: '9999px',
+                background: dark ? 'rgba(57,255,136,0.08)' : 'rgba(5,150,105,0.08)',
+                border: dark ? '1px solid rgba(57,255,136,0.25)' : '1px solid rgba(5,150,105,0.2)',
+                color: dark ? '#39FF88' : '#059669',
+                fontSize: '12px',
+                fontWeight: 600,
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: dark ? '#39FF88' : '#059669', boxShadow: '0 0 10px currentColor' }} />
+                Open for freelance works
+              </div>
+
+              {/* Subtitle */}
+              <p style={{
+                fontFamily: "'Big Shoulders Display', sans-serif",
+                fontSize: 'clamp(20px, 5.5vw, 28px)',
+                fontWeight: 800,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: dark ? '#39FF88' : '#059669',
+                margin: 0,
+              }}>
+                Product Designer (UI/UX)
+              </p>
+
+              {/* Portrait Center */}
+              <div style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', margin: '4px 0' }}>
+                <div style={{
+                  position: 'absolute', inset: '-10% -10%',
+                  background: 'radial-gradient(circle, rgba(57,255,136,0.35) 0%, transparent 65%)',
+                  filter: 'blur(20px)', pointerEvents: 'none', zIndex: 0,
+                }} />
+                <div style={{
+                  position: 'relative', zIndex: 1,
+                  width: 'min(270px, 70vw)',
+                  height: 'auto',
+                  aspectRatio: '490/560',
+                  borderRadius: '140px 140px 0 0',
+                  overflow: 'hidden',
+                  background: 'linear-gradient(180deg, rgba(83,217,165,0.32) 0%, rgba(83,217,165,0.10) 42%, rgba(83,217,165,0.18) 100%)',
+                  boxShadow: '0 0 0 1px rgba(83,217,165,0.2), 0 20px 50px rgba(0,0,0,0.4)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}>
+                  <img src={heroPortraitImg} alt="Yogesh Waran" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+                </div>
+              </div>
+
+              {/* Intro Bio */}
+              <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text3)', maxWidth: '420px', margin: '0 auto' }}>
+                Hey there! I'm a Brand & UI/UX Designer crafting scalable SaaS, Fintech & Mobile experiences in Chennai, India.
+              </p>
+
+              {/* Stats Row */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '8px',
+                width: '100%',
+                maxWidth: '380px',
+                margin: '2px 0',
+              }}>
+                {[
+                  { value: '10+', label: 'Projects' },
+                  { value: '1.3+', label: 'Years Exp' },
+                  { value: '2', label: 'Certifications' },
+                ].map(item => (
+                  <div key={item.label} style={{
+                    display: 'flex', flexDirection: 'column', alignItems: 'center',
+                    padding: '8px 4px',
+                    borderRadius: '14px',
+                    background: 'var(--card)',
+                    border: '1px solid var(--border)',
+                  }}>
+                    <span style={{ fontFamily: "'Big Shoulders Display', sans-serif", fontSize: '20px', fontWeight: 900, color: 'var(--text)', lineHeight: 1 }}>{item.value}</span>
+                    <span style={{ fontSize: '9.5px', color: 'var(--text4)', textTransform: 'uppercase', letterSpacing: '0.03em', marginTop: '3px' }}>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '10px', width: '100%', maxWidth: '380px' }}>
+                <button
+                  onClick={() => { scrollTo('contact'); sound.play('click') }}
+                  style={{
+                    flex: 1,
+                    padding: '13px 18px',
+                    borderRadius: '9999px',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    background: 'var(--text)',
+                    color: 'var(--bg)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+                  }}
+                >
+                  Schedule Call
+                </button>
+                <a
+                  href={resumePdf as unknown as string}
+                  download="YogeshWaran-Resume.pdf"
+                  onClick={() => sound.play('click')}
+                  style={{
+                    flex: 1,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    padding: '13px 18px',
+                    borderRadius: '9999px',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    background: 'transparent',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <Download size={14} strokeWidth={2} /> Resume
+                </a>
               </div>
             </div>
           </div>
