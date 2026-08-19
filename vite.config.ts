@@ -12,11 +12,19 @@ export default defineConfig(({ mode }) => {
   const projectRoot = import.meta.dirname
 
   return {
+    // FIGMA_PUBLIC_URL is only ever set by Figma Make's own publish pipeline.
+    // On any other host (Vercel, Netlify, etc.) that var is undefined, so we
+    // fall back to an absolute root path ('/') rather than a relative one
+    // ('./'). Relative paths only resolve correctly if the page is always
+    // served from the exact same directory depth it was built for — on
+    // Vercel (and most static hosts) the app is served from the domain
+    // root, so '/' is the path that actually works there. Using './'
+    // previously caused every hashed asset (including all imported
+    // images) to 404 in production while working fine locally, since local
+    // dev always uses base: '/' regardless of this logic.
     base: process.env.FIGMA_PUBLIC_URL
       ? `${process.env.FIGMA_PUBLIC_URL}/`
-      : mode === 'development'
-        ? '/'
-        : './',
+      : '/',
     build: {
       sourcemap: emitSourcemaps ? 'inline' : false,
       minify: !emitSourcemaps,
