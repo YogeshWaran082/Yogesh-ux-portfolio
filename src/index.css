@@ -415,11 +415,13 @@ body {
   .hero-grid {
     grid-template-columns: 1fr;
     min-height: auto;
+    gap: 32px;
   }
   .hero-left,
   .hero-right {
     justify-items: start;
     text-align: left;
+    width: 100%;
   }
   .hero-right {
     align-items: start;
@@ -431,8 +433,89 @@ body {
     justify-items: start;
     text-align: left;
   }
+  .hero-stats-block {
+    justify-items: start;
+    gap: 16px;
+  }
   .hero-center {
-    min-height: 500px;
+    min-height: auto;
+    width: 100%;
+    margin-top: 10px !important;
+  }
+  .hero-portrait-frame {
+    width: min(420px, 86vw) !important;
+    height: auto !important;
+    aspect-ratio: 490/560;
+    margin: 0 auto;
+  }
+  .hero-actions {
+    width: 100%;
+  }
+  .hero-button-primary,
+  .hero-button-secondary {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-stats-block {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .hero-stat-number {
+    font-size: 24px;
+  }
+  .hero-actions {
+    flex-direction: column;
+  }
+  .hero-button-primary,
+  .hero-button-secondary {
+    width: 100%;
+  }
+  .hybrid-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .freelance-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .freelance-row-thumb {
+    width: 100% !important;
+    height: 180px !important;
+  }
+  .freelance-row-actions {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+}
+
+/* ── Responsive helpers ────────────────────────────────────────────── */
+.hybrid-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  min-height: 380px;
+}
+@media (max-width: 900px) {
+  .hybrid-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.freelance-row {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .freelance-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 

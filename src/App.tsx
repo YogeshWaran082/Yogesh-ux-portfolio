@@ -742,39 +742,88 @@ export default function App() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div style={{ position:'fixed', inset:0, zIndex:40, background:'var(--bg)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'32px' }}>
-          {['About','Work','Skills','Experience','Contact'].map(item => (
-            <button key={item} onClick={() => scrollTo(item.toLowerCase())}
-              style={{ background:'none', border:'none', cursor:'pointer', fontSize:'32px', fontWeight:700, color:'var(--text)', fontFamily:"'Big Shoulders Display',sans-serif" }}>
-              {item}
+        <div style={{
+          position:'fixed', inset:0, zIndex:40,
+          background: dark ? 'rgba(8,8,8,0.96)' : 'rgba(244,244,242,0.96)',
+          backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+          display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+          padding: '24px', gap:'20px', animation: 'heroReveal 0.3s ease forwards',
+        }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginBottom: '16px' }}>
+            {['About','Work','Skills','Experience','Contact'].map(item => (
+              <button key={item} onClick={() => {
+                sound.play('click')
+                scrollTo(item.toLowerCase())
+              }}
+                style={{
+                  background:'none', border:'none', cursor:'pointer',
+                  fontSize:'clamp(28px, 7vw, 42px)', fontWeight:800,
+                  color:'var(--text)', fontFamily:"'Big Shoulders Display',sans-serif",
+                  letterSpacing: '0.04em', textTransform: 'uppercase',
+                  transition: 'color 0.2s',
+                }}>
+                {item}
+              </button>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', width: '100%', maxWidth: '320px' }}>
+            <a href={resumePdf as unknown as string} download="YogeshWaran-Resume.pdf"
+              onClick={() => sound.play('click')}
+              style={{
+                flex: 1, minWidth: '140px',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                padding: '14px 20px', borderRadius: '9999px', fontSize: '14px', fontWeight: 600,
+                background: 'var(--accent)', color: 'var(--accent-fg)', textDecoration: 'none',
+                boxShadow: '0 8px 24px var(--glow)',
+              }}
+            >
+              <Download size={15} strokeWidth={2} /> Resume
+            </a>
+            <button
+              type="button"
+              onClick={() => {
+                const next = !soundOn
+                setSoundOn(next)
+                sound.setEnabled(next)
+                if (next) sound.play('click')
+              }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                padding: '14px 20px', borderRadius: '9999px', fontSize: '13px', fontWeight: 600,
+                background: soundOn ? 'var(--accent-bg)' : 'var(--card)',
+                border: soundOn ? '1px solid var(--accent-border)' : '1px solid var(--border)',
+                color: soundOn ? 'var(--accent)' : 'var(--text2)',
+              }}
+            >
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: soundOn ? 'var(--accent)' : 'var(--text4)' }} />
+              {soundOn ? 'Sound On' : 'Sound Off'}
             </button>
-          ))}
+          </div>
         </div>
       )}
 
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <section id="home" className="hero-section hero-reveal" style={{ position: 'relative', overflow: 'hidden', paddingTop: '84px', minHeight: '1045.29px', height: '1045.29px', background: dark ? '#050505' : '#f3f3f1' }}>
+      <section id="home" className="hero-section hero-reveal" style={{ position: 'relative', overflow: 'hidden', paddingTop: 'clamp(84px, 12vw, 110px)', minHeight: '100vh', height: 'auto', paddingBottom: 'clamp(40px, 6vw, 80px)', background: dark ? '#050505' : '#f3f3f1' }}>
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1 }}>
           <div style={{ position: 'absolute', top: '-12%', left: '8%', width: '420px', height: '420px', borderRadius: '50%', background: dark ? 'radial-gradient(circle, rgba(57,255,136,0.12) 0%, transparent 55%)' : 'radial-gradient(circle, rgba(5,150,105,0.12) 0%, transparent 55%)' }} />
           <div style={{ position: 'absolute', bottom: '-8%', right: '8%', width: '320px', height: '320px', borderRadius: '50%', background: dark ? 'radial-gradient(circle, rgba(57,255,136,0.08) 0%, transparent 65%)' : 'radial-gradient(circle, rgba(5,150,105,0.08) 0%, transparent 65%)' }} />
         </div>
 
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1500px', margin: '0 auto', padding: '0 clamp(24px, 4vw, 88px)' }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1500px', margin: '0 auto', padding: '0 clamp(16px, 4vw, 88px)' }}>
           <div style={{ display: 'grid', gap: '0px' }}>
             <div style={{
               fontFamily: "'Big Shoulders Display',sans-serif",
               fontWeight: 900,
               margin: 0,
-              paddingTop: '32px',
-              fontSize: '185px',
-              lineHeight: '0.9',
-              letterSpacing: '-3px',
-              color: '#f5f5f5',
+              paddingTop: 'clamp(16px, 3vw, 32px)',
+              fontSize: 'clamp(46px, 12.5vw, 185px)',
+              lineHeight: '0.92',
+              letterSpacing: 'clamp(-1px, -0.02em, -3px)',
+              color: dark ? '#f5f5f5' : '#111111',
               textTransform: 'uppercase',
               textAlign: 'left',
-              textShadow: '0 0 0 rgba(0,0,0,0)',
-              whiteSpace: 'nowrap',
-              marginLeft: '0',
+              wordBreak: 'break-word',
               width: '100%',
               opacity: 0,
               animation: reducedMotion ? 'none' : 'heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards',
@@ -1263,8 +1312,8 @@ function HybridAdvantageSection() {
           border:'1px solid var(--border)',
           boxShadow:'0 40px 90px rgba(15,23,42,0.08)',
         }}>
-          <div style={{ display:'grid', gridTemplateColumns:'1.05fr 0.95fr', minHeight:'380px' }}>
-            <div style={{ padding:'clamp(40px,5vw,72px)', display:'grid', gap:'20px', borderRight:'1px solid rgba(0,0,0,0.04)' }}>
+          <div className="hybrid-grid">
+            <div style={{ padding:'clamp(28px,5vw,72px)', display:'grid', gap:'20px', borderRight: '1px solid var(--border)' }}>
               <h2 style={{ ...sectionHeadingMedium }}>
                 UI/UX Design &<br />
                 Development
@@ -1272,12 +1321,12 @@ function HybridAdvantageSection() {
               <p style={{ ...sectionSubheading, maxWidth:'560px' }}>
                 I design and develop modern, responsive web and mobile applications that deliver seamless user experiences and drive results.
               </p>
-              <a href="#work" style={{ display:'inline-flex', alignItems:'center', gap:'10px', marginTop:'14px', color:'var(--link)', fontWeight:700, fontSize:'15px', textDecoration:'none' }}>
+              <a href="#work" onClick={() => scrollTo('work')} style={{ display:'inline-flex', alignItems:'center', gap:'10px', marginTop:'14px', color:'var(--link)', fontWeight:700, fontSize:'15px', textDecoration:'none' }}>
                 Learn more <ArrowUpRight size={16} strokeWidth={2} />
               </a>
             </div>
 
-            <div style={{ padding:'clamp(40px,5vw,72px)', display:'grid', gap:'18px', alignContent:'center' }}>
+            <div style={{ padding:'clamp(28px,5vw,72px)', display:'grid', gap:'18px', alignContent:'center' }}>
               {[
                 { label:'Service', value:'UI/UX Design & Development' },
                 { label:'What I deliver', value:'UI/UX Design, Frontend Development, Responsive Websites, Web Applications' },
@@ -1285,9 +1334,9 @@ function HybridAdvantageSection() {
                 { label:'Timeline', value:'7 – 21 Days' },
                 { label:'Support', value:'Post-launch Support & Maintenance' },
               ].map((item, index) => (
-                <div key={index} style={{ display:'grid', gridTemplateColumns:'max-content 1fr', gap:'18px', alignItems:'start', padding:'14px 0', borderBottom: index < 4 ? '1px solid rgba(0,0,0,0.06)' : 'none' }}>
-                  <span style={{ fontSize:'13px', fontWeight:700, color:'var(--text)', whiteSpace:'nowrap' }}>{item.label}</span>
-                  <span style={{ fontSize:'14px', lineHeight:1.8, color:'var(--text3)' }}>{item.value}</span>
+                <div key={index} style={{ display:'flex', flexDirection: 'column', gap:'6px', padding:'14px 0', borderBottom: index < 4 ? '1px solid var(--border)' : 'none' }}>
+                  <span style={{ fontSize:'13px', fontWeight:700, color:'var(--text)' }}>{item.label}</span>
+                  <span style={{ fontSize:'14px', lineHeight:1.7, color:'var(--text3)' }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -1401,7 +1450,7 @@ function SkillsSection() {
               </h2>
 
               {/* Tool icons */}
-              <div style={{ display:'flex', gap:'14px', flexWrap:'wrap', marginBottom:'36px' }}>
+              <div style={{ display:'flex', gap:'clamp(8px, 2vw, 14px)', flexWrap:'wrap', marginBottom:'36px' }}>
                 {[
                   { label:'Figma',      icon:'◈' },
                   { label:'XD',         icon:'Xd' },
@@ -1410,7 +1459,7 @@ function SkillsSection() {
                   { label:'Photoshop',  icon:'Ps' },
                 ].map(t => (
                   <div key={t.label} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'6px' }}>
-                    <div style={{ width:'64px', height:'78px', borderRadius:'28px', background:'var(--skill-tool-bg)', border:'1px solid var(--skill-tool-bdr)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'16px', fontWeight:700, color:'var(--skill-text)' }}>{t.icon}</div>
+                    <div style={{ width:'clamp(52px, 13vw, 64px)', height:'clamp(64px, 16vw, 78px)', borderRadius:'22px', background:'var(--skill-tool-bg)', border:'1px solid var(--skill-tool-bdr)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'15px', fontWeight:700, color:'var(--skill-text)' }}>{t.icon}</div>
                     <span style={{ fontSize:'10px', color:'var(--skill-muted)' }}>{t.label}</span>
                   </div>
                 ))}
@@ -1504,7 +1553,7 @@ function ExpItem({ exp, last }: { exp: typeof experience[0]; last: boolean }) {
 function ContactForm() {
   const [form, setForm] = useState({ name:'', email:'', message:'' })
 
-  const base = { width:'100%', background:'transparent', border:'none', borderBottom:'1px solid var(--input-border)', padding:'11px 0', fontSize:'14px', color:'var(--contact-text)', outline:'none', boxSizing:'border-box' as const }
+  const base = { width:'100%', background:'transparent', border:'none', borderBottom:'1px solid var(--input-border)', padding:'12px 0', fontSize:'16px', color:'var(--contact-text)', outline:'none', boxSizing:'border-box' as const }
 
   const buildWhatsApp = () => {
     const text = `Hi Yogesh! I'm ${form.name} (${form.email}).\n\n${form.message}`
@@ -1519,11 +1568,13 @@ function ContactForm() {
 
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault()
+    playSound('click')
     window.open(buildWhatsApp(), '_blank')
   }
 
   const handleEmail = (e: React.MouseEvent) => {
     e.preventDefault()
+    playSound('click')
     if (!form.name || !form.message) return
     window.location.href = buildEmail()
   }
@@ -1890,18 +1941,17 @@ function FreelanceRow({ item, last }: { item: typeof freelanceItems[0]; last: bo
         playSound('hover')
       }}
       onMouseLeave={() => setHovered(false)}
+      className="freelance-row"
       style={{
-        display:'grid', gridTemplateColumns:'200px 1fr auto', gap:'32px', alignItems:'center',
-        padding:'clamp(24px,3vw,36px) 0',
+        padding:'clamp(20px,3vw,36px) 0',
         borderBottom: last ? 'none' : '1px solid var(--divider)',
         transition:'background 0.2s',
         borderRadius: hovered ? '20px' : '0',
         cursor: 'pointer',
       }}
-      className="md:grid"
     >
       {/* Thumb */}
-      <div style={{ borderRadius:'16px', overflow:'hidden', height:'110px', flexShrink:0, border:'1px solid var(--border)' }}>
+      <div className="freelance-row-thumb" style={{ borderRadius:'16px', overflow:'hidden', height:'110px', flexShrink:0, border:'1px solid var(--border)' }}>
         <img src={item.img} alt={item.title} loading="lazy" decoding="async"
           style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.6s', transform: hovered ? 'scale(1.06)' : 'scale(1)' }}
         />
@@ -1913,7 +1963,7 @@ function FreelanceRow({ item, last }: { item: typeof freelanceItems[0]; last: bo
           <span style={{ fontSize:'11px', color:'var(--text4)', letterSpacing:'0.08em', textTransform:'uppercase' }}>{item.client}</span>
           <span style={{ fontSize:'11px', padding:'2px 9px', borderRadius:'9999px', background:'var(--tag-bg)', border:'1px solid var(--tag-border)', color:'var(--text4)' }}>{item.year}</span>
         </div>
-        <h3 style={{ fontSize:'clamp(18px,2.5vw,26px)', fontWeight:700, color:'var(--text)', margin:'0 0 6px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{item.title}</h3>
+        <h3 style={{ fontSize:'clamp(18px,2.5vw,26px)', fontWeight:700, color:'var(--text)', margin:'0 0 6px', wordBreak:'break-word' }}>{item.title}</h3>
         <p style={{ fontSize:'13px', lineHeight:'1.65', color:'var(--text3)', margin:'0 0 12px', display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden' }}>{item.desc}</p>
         <div style={{ display:'flex', gap:'6px', flexWrap:'wrap' }}>
           {item.tags.map(t => (
@@ -1925,7 +1975,7 @@ function FreelanceRow({ item, last }: { item: typeof freelanceItems[0]; last: bo
       </div>
 
       {/* Role + arrow */}
-      <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'16px', flexShrink:0 }}>
+      <div className="freelance-row-actions" style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'16px', flexShrink:0 }}>
         <span style={{ fontSize:'12px', color:'var(--text4)', textAlign:'right', lineHeight:'1.5' }}>{item.role}</span>
         <div style={{ width:'40px', height:'40px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', background: hovered ? 'var(--accent)' : 'var(--tag-bg)', border:`1px solid ${hovered ? 'var(--accent)' : 'var(--tag-border)'}`, color: hovered ? 'var(--accent-fg)' : 'var(--text4)', transition:'all 0.3s' }}>
           <ExternalLink size={15} strokeWidth={1.75}/>
