@@ -833,7 +833,7 @@ export default function App() {
             </div>
 
             {/* Desktop Hero Grid (>= 960px) */}
-            <div className="hidden lg:grid hero-grid" style={{ alignItems: 'end', marginTop: '0', columnGap: '0px', rowGap: '0px' }}>
+            <div className="hero-desktop" style={{ alignItems: 'end', marginTop: '0', columnGap: '0px', rowGap: '0px' }}>
               <div className="hero-left" style={{ marginTop: 'auto', alignSelf: 'end', paddingBottom: '0', opacity: 0, animation: reducedMotion ? 'none' : 'heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards', animationDelay: '0.2s' }}>
                 <span className="hero-label hero-label-left" style={{ letterSpacing: '0.12em', transform: 'skewY(-4deg)' }}>PRODUCT</span>
                 <div className="hero-badge" style={{
@@ -911,7 +911,7 @@ export default function App() {
             </div>
 
             {/* Mobile / Tablet Hero Flow (< 960px) */}
-            <div className="flex lg:hidden flex-col items-center text-center" style={{ gap: '16px', marginTop: '12px', width: '100%' }}>
+            <div className="hero-mobile" style={{ gap: '16px', marginTop: '12px', width: '100%' }}>
               {/* Badge */}
               <div style={{
                 display: 'inline-flex',
