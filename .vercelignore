@@ -1,0 +1,23 @@
+# Local/generated directories
+.git
+.agents
+.claude
+.snapshots
+.vercel
+node_modules
+dist
+audit
+
+# Local design review exports
+footer-design-comparison.png
+footer-implementation-desktop.png
+footer-implementation-mobile.png
+design-qa.md
+new-file.tsx
+
+# Unused legacy hero sequences. The app uses hero-frames-0918 only.
+public/assets/hero-frames
+public/assets/hero-frames-transparent
+public/assets/hero-frames-hd
+public/assets/hero-frames-webp
+public/assets/hero-frames-3pose
