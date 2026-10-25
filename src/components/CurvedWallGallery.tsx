@@ -432,13 +432,14 @@ function createHorizontalMobileCable(
     y: cardTarget.top + cardTarget.height * 0.5,
   }
 
-  const cableStart: Point2D = { x: pStart.x + 14, y: pStart.y }
-  const cableEnd: Point2D = { x: pEnd.x - 14, y: pEnd.y }
+  // Plug socket + body + boot extends 24px from card edge
+  const cableStart: Point2D = { x: pStart.x + 24, y: pStart.y }
+  const cableEnd: Point2D = { x: pEnd.x - 24, y: pEnd.y }
 
-  const gap = Math.max(20, cableEnd.x - cableStart.x)
-  const sag = Math.min(14, Math.max(4, gap * 0.12))
+  const gap = Math.max(16, cableEnd.x - cableStart.x)
+  const sag = Math.min(6, Math.max(0, gap * 0.05))
 
-  const leadDist = Math.min(10, Math.max(5, gap * 0.14))
+  const leadDist = Math.min(8, Math.max(3, gap * 0.15))
   const leadInEnd: Point2D = { x: cableStart.x + leadDist, y: cableStart.y }
   const leadInPath = `M ${cableStart.x} ${cableStart.y} L ${leadInEnd.x} ${leadInEnd.y}`
 
@@ -449,8 +450,8 @@ function createHorizontalMobileCable(
   const cp2: Point2D = { x: leadOutStart.x - (leadOutStart.x - leadInEnd.x) * 0.35, y: leadOutStart.y + sag }
   const coilPoints = sampleBezierPoints(leadInEnd, cp1, cp2, leadOutStart, 32)
   const curveLen = Math.hypot(leadOutStart.x - leadInEnd.x, leadOutStart.y - leadInEnd.y) + sag * 0.5
-  const turns = Math.max(4, Math.min(8, Math.round(curveLen / 8.5)))
-  const { frontLoops, backPaths } = buildHelicalCoils(coilPoints, turns, 9)
+  const turns = Math.max(3, Math.min(5, Math.round(curveLen / 7.2)))
+  const { frontLoops, backPaths } = buildHelicalCoils(coilPoints, turns, 8.5)
 
   const pulsePath = `${leadInPath} C ${cp1.x} ${cp1.y}, ${cp2.x} ${cp2.y}, ${leadOutStart.x} ${leadOutStart.y} L ${cableEnd.x} ${cableEnd.y}`
 
@@ -462,6 +463,74 @@ function createHorizontalMobileCable(
     pulsePath,
     startPlug: { x: pStart.x, y: pStart.y, side: "right", deg: 0 },
     endPlug: { x: pEnd.x, y: pEnd.y, side: "left", deg: 180 },
+  }
+}
+
+// 7. Lead-in entry cable on Card 0 (left edge)
+function createEntryMobileCable(
+  card: { left: number; top: number; width: number; height: number },
+): CoiledCableData {
+  const pEnd: Point2D = {
+    x: card.left,
+    y: card.top + card.height * 0.5,
+  }
+  const cableEnd: Point2D = { x: pEnd.x - 24, y: pEnd.y }
+  const cableStart: Point2D = { x: Math.max(0, pEnd.x - 68), y: pEnd.y }
+
+  const leadInEnd: Point2D = { x: cableStart.x + 8, y: cableStart.y }
+  const leadInPath = `M ${cableStart.x} ${cableStart.y} L ${leadInEnd.x} ${leadInEnd.y}`
+
+  const leadOutStart: Point2D = { x: cableEnd.x - 6, y: cableEnd.y }
+  const leadOutPath = `M ${leadOutStart.x} ${leadOutStart.y} L ${cableEnd.x} ${cableEnd.y}`
+
+  const coilPoints = sampleLinePoints(leadInEnd, leadOutStart, 24)
+  const turns = 3
+  const { frontLoops, backPaths } = buildHelicalCoils(coilPoints, turns, 8.5)
+
+  const pulsePath = `M ${cableStart.x} ${cableStart.y} L ${cableEnd.x} ${cableEnd.y}`
+
+  return {
+    leadInPath,
+    coilBackPath: backPaths.join(" "),
+    coilFrontLoops: frontLoops,
+    leadOutPath,
+    pulsePath,
+    startPlug: { x: cableStart.x, y: cableStart.y, side: "left", deg: 180 },
+    endPlug: { x: pEnd.x, y: pEnd.y, side: "left", deg: 180 },
+  }
+}
+
+// 8. Lead-out exit cable on Card 13 (right edge)
+function createExitMobileCable(
+  card: { left: number; top: number; width: number; height: number },
+): CoiledCableData {
+  const pStart: Point2D = {
+    x: card.left + card.width,
+    y: card.top + card.height * 0.5,
+  }
+  const cableStart: Point2D = { x: pStart.x + 24, y: pStart.y }
+  const cableEnd: Point2D = { x: pStart.x + 68, y: pStart.y }
+
+  const leadInEnd: Point2D = { x: cableStart.x + 6, y: cableStart.y }
+  const leadInPath = `M ${cableStart.x} ${cableStart.y} L ${leadInEnd.x} ${leadInEnd.y}`
+
+  const leadOutStart: Point2D = { x: cableEnd.x - 8, y: cableEnd.y }
+  const leadOutPath = `M ${leadOutStart.x} ${leadOutStart.y} L ${cableEnd.x} ${cableEnd.y}`
+
+  const coilPoints = sampleLinePoints(leadInEnd, leadOutStart, 24)
+  const turns = 3
+  const { frontLoops, backPaths } = buildHelicalCoils(coilPoints, turns, 8.5)
+
+  const pulsePath = `M ${cableStart.x} ${cableStart.y} L ${cableEnd.x} ${cableEnd.y}`
+
+  return {
+    leadInPath,
+    coilBackPath: backPaths.join(" "),
+    coilFrontLoops: frontLoops,
+    leadOutPath,
+    pulsePath,
+    startPlug: { x: pStart.x, y: pStart.y, side: "right", deg: 0 },
+    endPlug: { x: cableEnd.x, y: cableEnd.y, side: "right", deg: 0 },
   }
 }
 
@@ -712,6 +781,7 @@ const cardPositionClasses = [
 
 export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null)
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
   const [desktopCables, setDesktopCables] = useState<CableLayout>({ width: 1, height: 1, cables: [] })
   const [mobileCables, setMobileCables] = useState<CableLayout>({ width: 1, height: 1, cables: [] })
   const activeItem = activeModalIndex === null ? null : items[activeModalIndex]
@@ -719,6 +789,58 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
   const galleryRef = useRef<HTMLDivElement>(null)
   const desktopTrackRef = useRef<HTMLDivElement>(null)
   const mobileRailRef = useRef<HTMLDivElement>(null)
+
+  // Track active slide index during horizontal rail scrolling
+  useEffect(() => {
+    const rail = mobileRailRef.current
+    if (!rail) return
+
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const cards = Array.from(rail.querySelectorAll<HTMLElement>(".gallery-project-card"))
+          if (cards.length) {
+            const railCenter = rail.scrollLeft + rail.clientWidth / 2
+            let closestIndex = 0
+            let minDistance = Infinity
+
+            cards.forEach((card, idx) => {
+              const cardCenter = card.offsetLeft + card.offsetWidth / 2
+              const dist = Math.abs(railCenter - cardCenter)
+              if (dist < minDistance) {
+                minDistance = dist
+                closestIndex = idx
+              }
+            })
+
+            setActiveSlideIndex(closestIndex)
+          }
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    rail.addEventListener("scroll", onScroll, { passive: true })
+    return () => rail.removeEventListener("scroll", onScroll)
+  }, [items.length])
+
+  const scrollToSlide = (index: number) => {
+    const rail = mobileRailRef.current
+    if (!rail) return
+    const cards = Array.from(rail.querySelectorAll<HTMLElement>(".gallery-project-card"))
+    const target = cards[index]
+    if (!target) return
+    const targetLeft = target.offsetLeft - (rail.clientWidth - target.offsetWidth) / 2
+    rail.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" })
+    setActiveSlideIndex(index)
+  }
+
+  const scrollMobileRail = (direction: -1 | 1) => {
+    const nextIndex = Math.max(0, Math.min(items.length - 1, activeSlideIndex + direction))
+    scrollToSlide(nextIndex)
+  }
 
   useLayoutEffect(() => {
     const track = desktopTrackRef.current
@@ -782,10 +904,18 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
             }
           })
 
+          if (cardBoxes[0]) {
+            cables.push(createEntryMobileCable(cardBoxes[0]))
+          }
+
           for (let i = 0; i < cardBoxes.length - 1; i += 1) {
             if (cardBoxes[i] && cardBoxes[i + 1]) {
               cables.push(createHorizontalMobileCable(cardBoxes[i], cardBoxes[i + 1]))
             }
+          }
+
+          if (cardBoxes[cardBoxes.length - 1]) {
+            cables.push(createExitMobileCable(cardBoxes[cardBoxes.length - 1]))
           }
 
           setMobileCables({
@@ -827,7 +957,7 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
     const section = gallery.closest<HTMLElement>("section") || gallery
 
     const media = gsap.matchMedia()
-    media.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => {
+    media.add("(min-width: 1025px) and (prefers-reduced-motion: no-preference)", () => {
       const distance = () => Math.max(0, track.scrollWidth - window.innerWidth)
       const tween = gsap.to(track, {
         x: () => -distance(),
@@ -910,13 +1040,7 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
       return (idx + direction + items.length) % items.length
     })
 
-  const scrollMobileRail = (direction: -1 | 1) => {
-    const rail = mobileRailRef.current
-    if (!rail) return
-    const card = rail.querySelector<HTMLElement>(".gallery-project-card")
-    const stride = card ? card.offsetWidth + 48 : rail.clientWidth * 0.82
-    rail.scrollBy({ left: stride * direction, behavior: "smooth" })
-  }
+
 
   return (
     <div ref={galleryRef} className="cable-gallery">
@@ -963,7 +1087,7 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
         <MeasuredCableSVG layout={desktopCables} id="desktop-gallery-plugs" layer="plugs" />
       </div>
 
-      {/* Mobile Heading */}
+      {/* Mobile / Tablet Heading */}
       <div className="gallery-mobile-heading">
         <div className="cable-gallery-kicker">
           <i />Selected archive
@@ -978,28 +1102,10 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
             Explore All <ArrowUpRight size={16} aria-hidden="true" />
           </button>
           <span>{String(items.length).padStart(2, "0")} Works</span>
-          <div className="gallery-mobile-arrows">
-            <button
-              type="button"
-              onClick={() => scrollMobileRail(-1)}
-              aria-label="Previous project"
-              className="gallery-arrow-btn"
-            >
-              <ArrowLeft size={16} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollMobileRail(1)}
-              aria-label="Next project"
-              className="gallery-arrow-btn"
-            >
-              <ArrowRight size={16} aria-hidden="true" />
-            </button>
-          </div>
         </div>
       </div>
 
-      {/* Mobile Rail (Single Column with vertical coiled cables) */}
+      {/* Mobile / Tablet Rail (Horizontal swipe carousel with connected coiled cables) */}
       <div ref={mobileRailRef} className="gallery-mobile-rail" role="region" aria-label="Connected design gallery">
         <MeasuredCableSVG layout={mobileCables} id="mobile-gallery" layer="paths" className="is-mobile" />
         {items.map((item, index) => (
@@ -1012,6 +1118,43 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
           />
         ))}
         <MeasuredCableSVG layout={mobileCables} id="mobile-gallery-plugs" layer="plugs" className="is-mobile" />
+      </div>
+
+      {/* Mobile / Tablet Carousel Controls: Previous, 14-dot progress indicator track, Next */}
+      <div className="gallery-carousel-controls" aria-label="Gallery carousel controls">
+        <button
+          type="button"
+          onClick={() => scrollMobileRail(-1)}
+          disabled={activeSlideIndex === 0}
+          aria-label="Previous project"
+          className="gallery-nav-btn is-prev"
+        >
+          <ArrowLeft size={16} aria-hidden="true" />
+        </button>
+
+        <div className="gallery-progress-track" role="tablist" aria-label="Project slide navigation">
+          {items.map((item, idx) => (
+            <button
+              key={`dot-${item.title}-${idx}`}
+              type="button"
+              role="tab"
+              aria-selected={activeSlideIndex === idx}
+              aria-label={`Go to slide ${idx + 1}: ${item.title}`}
+              className={`gallery-progress-dot ${activeSlideIndex === idx ? "is-active" : ""}`}
+              onClick={() => scrollToSlide(idx)}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => scrollMobileRail(1)}
+          disabled={activeSlideIndex === items.length - 1}
+          aria-label="Next project"
+          className="gallery-nav-btn is-next"
+        >
+          <ArrowRight size={16} aria-hidden="true" />
+        </button>
       </div>
 
       {/* Lightbox Modal */}
