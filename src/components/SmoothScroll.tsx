@@ -20,13 +20,16 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       return
     }
 
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: isTouch ? 0.8 : 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 1.2,
+      syncTouch: false,
+      touchMultiplier: 1.0,
     })
 
     lenisRef.current = lenis

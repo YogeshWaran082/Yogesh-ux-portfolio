@@ -814,7 +814,7 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
               }
             })
 
-            setActiveSlideIndex(closestIndex)
+            setActiveSlideIndex((prev) => (prev === closestIndex ? prev : closestIndex))
           }
           ticking = false
         })
@@ -851,78 +851,75 @@ export function CurvedWallGallery({ items }: CurvedWallGalleryProps) {
     const measure = () => {
       window.cancelAnimationFrame(frame)
       frame = window.requestAnimationFrame(() => {
-        // 1. Measure Desktop Layout
-        const desktopCards = Array.from(track.querySelectorAll<HTMLElement>(".gallery-project-media"))
-        const trackRect = track.getBoundingClientRect()
+        const isDesktop = window.innerWidth > 1024
 
-        if (desktopCards.length === items.length && trackRect.width > 0 && trackRect.height > 0) {
-          const rects = desktopCards.map((card) => card.getBoundingClientRect())
-          const cables: CoiledCableData[] = []
+        // 1. Measure Desktop Layout only when in desktop viewport
+        if (isDesktop) {
+          const desktopCards = Array.from(track.querySelectorAll<HTMLElement>(".gallery-project-media"))
+          const trackRect = track.getBoundingClientRect()
 
-          // Sequential Connections matching user's approved reference:
-          // Cable A: 01 (KavyaNutrix) LEFT -> 02 (Novara Group) TOP/RIGHT
-          if (rects[0] && rects[1]) {
-            cables.push(createTriadLeftCable(rects[0], rects[1], trackRect))
-          }
-          // Cable B: 02 (Novara Group) RIGHT -> 03 (Fintech Command) LEFT (smooth catenary U-loop below KavyaNutrix)
-          if (rects[1] && rects[2]) {
-            cables.push(createTriadBottomCable(rects[1], rects[2], trackRect))
-          }
+          if (desktopCards.length === items.length && trackRect.width > 0 && trackRect.height > 0) {
+            const rects = desktopCards.map((card) => card.getBoundingClientRect())
+            const cables: CoiledCableData[] = []
 
-          // Connecting cable from Card 03 (bottom) to Card 04 (top), and onward through all 14 cards!
-          // Unbroken sequential chain connecting every single card to the next card!
-          for (let i = 2; i < rects.length - 1; i += 1) {
-            if (rects[i] && rects[i + 1]) {
-              if (i % 2 === 0) {
-                // Current card i is BOTTOM, next card i+1 is TOP
-                cables.push(createBottomToTopCable(rects[i], rects[i + 1], trackRect))
-              } else {
-                // Current card i is TOP, next card i+1 is BOTTOM
-                cables.push(createTopToBottomCable(rects[i], rects[i + 1], trackRect))
+            if (rects[0] && rects[1]) {
+              cables.push(createTriadLeftCable(rects[0], rects[1], trackRect))
+            }
+            if (rects[1] && rects[2]) {
+              cables.push(createTriadBottomCable(rects[1], rects[2], trackRect))
+            }
+
+            for (let i = 2; i < rects.length - 1; i += 1) {
+              if (rects[i] && rects[i + 1]) {
+                if (i % 2 === 0) {
+                  cables.push(createBottomToTopCable(rects[i], rects[i + 1], trackRect))
+                } else {
+                  cables.push(createTopToBottomCable(rects[i], rects[i + 1], trackRect))
+                }
               }
             }
+
+            setDesktopCables({
+              width: track.scrollWidth,
+              height: track.offsetHeight,
+              cables,
+            })
           }
+        } else {
+          // 2. Measure Mobile Layout only when in mobile/tablet viewport
+          const mobileCards = Array.from(rail.querySelectorAll<HTMLElement>(".gallery-project-card"))
+          if (mobileCards.length === items.length && rail.offsetWidth > 0) {
+            const cables: CoiledCableData[] = []
+            const cardBoxes = mobileCards.map((card) => {
+              const media = card.querySelector<HTMLElement>(".gallery-project-media")
+              return {
+                left: card.offsetLeft + (media ? media.offsetLeft : 0),
+                top: card.offsetTop + (media ? media.offsetTop : 0),
+                width: media ? media.offsetWidth : card.offsetWidth,
+                height: media ? media.offsetHeight : card.offsetHeight,
+              }
+            })
 
-          setDesktopCables({
-            width: track.scrollWidth,
-            height: track.offsetHeight,
-            cables,
-          })
-        }
-
-        // 2. Measure Mobile Layout (Horizontal swipe rail with horizontal coiled cables)
-        const mobileCards = Array.from(rail.querySelectorAll<HTMLElement>(".gallery-project-card"))
-        if (mobileCards.length === items.length && rail.offsetWidth > 0) {
-          const cables: CoiledCableData[] = []
-          const cardBoxes = mobileCards.map((card) => {
-            const media = card.querySelector<HTMLElement>(".gallery-project-media")
-            return {
-              left: card.offsetLeft + (media ? media.offsetLeft : 0),
-              top: card.offsetTop + (media ? media.offsetTop : 0),
-              width: media ? media.offsetWidth : card.offsetWidth,
-              height: media ? media.offsetHeight : card.offsetHeight,
+            if (cardBoxes[0]) {
+              cables.push(createEntryMobileCable(cardBoxes[0]))
             }
-          })
 
-          if (cardBoxes[0]) {
-            cables.push(createEntryMobileCable(cardBoxes[0]))
-          }
-
-          for (let i = 0; i < cardBoxes.length - 1; i += 1) {
-            if (cardBoxes[i] && cardBoxes[i + 1]) {
-              cables.push(createHorizontalMobileCable(cardBoxes[i], cardBoxes[i + 1]))
+            for (let i = 0; i < cardBoxes.length - 1; i += 1) {
+              if (cardBoxes[i] && cardBoxes[i + 1]) {
+                cables.push(createHorizontalMobileCable(cardBoxes[i], cardBoxes[i + 1]))
+              }
             }
-          }
 
-          if (cardBoxes[cardBoxes.length - 1]) {
-            cables.push(createExitMobileCable(cardBoxes[cardBoxes.length - 1]))
-          }
+            if (cardBoxes[cardBoxes.length - 1]) {
+              cables.push(createExitMobileCable(cardBoxes[cardBoxes.length - 1]))
+            }
 
-          setMobileCables({
-            width: rail.scrollWidth,
-            height: rail.offsetHeight,
-            cables,
-          })
+            setMobileCables({
+              width: rail.scrollWidth,
+              height: rail.offsetHeight,
+              cables,
+            })
+          }
         }
       })
     }

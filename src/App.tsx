@@ -12,7 +12,7 @@ import { InteractiveExperienceTimeline } from '@/components/InteractiveExperienc
 import { CertificationsModal, type CertificationData } from '@/components/CertificationsModal'
 import { ContactFormModal } from '@/components/ContactFormModal'
 import brandLogo from '@/imports/yogesh-ux-logo-transparent.png'
-import profilePortrait from '@/imports/yogesh-profile-pic.png'
+import profilePortrait from '@/imports/webp/yogesh-profile-pic.webp'
 import hrmImage from '@/imports/webp/hrm-dashboard.webp'
 import miniBankImage from '@/imports/webp/mini-bank.webp'
 import kfcImage from '@/imports/webp/kfc-thumbnail.2.webp'
@@ -373,45 +373,54 @@ function App() {
 
   useEffect(() => {
     const hero = document.getElementById("home")
-    if (!hero) return
-    const updateNavigation = () => {
-      const pastHero = hero.getBoundingClientRect().bottom <= 80
-      setScrolled(pastHero)
-      if (!pastHero) setMenuOpen(false)
-    }
-    updateNavigation()
-    window.addEventListener("scroll", updateNavigation, { passive: true })
-    window.addEventListener("resize", updateNavigation)
-    const observer = new ResizeObserver(updateNavigation)
-    observer.observe(hero)
-    return () => {
-      window.removeEventListener("scroll", updateNavigation)
-      window.removeEventListener("resize", updateNavigation)
-      observer.disconnect()
-    }
-  }, [])
-
-  useEffect(() => {
     const sections = ["home", "about", "methods", "skills", "experience", "work", "gallery", "contact"]
-    const handleScroll = () => {
-      const activationLine = Math.min(180, window.innerHeight * 0.3)
-      let nextSection = "home"
-      for (const id of sections) {
-        const el = document.getElementById(id)
-        if (el) {
-          const bounds = el.getBoundingClientRect()
-          if (bounds.top <= activationLine)
-            nextSection = id === "methods" || id === "skills" ? "about" : id
-        }
+    let ticking = false
+
+    let lastScrolled = false
+    let lastSection = "home"
+
+    const onScrollOrResize = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // 1. Check navigation past hero
+          if (hero) {
+            const pastHero = hero.getBoundingClientRect().bottom <= 80
+            if (pastHero !== lastScrolled) {
+              lastScrolled = pastHero
+              setScrolled(pastHero)
+              if (!pastHero) setMenuOpen(false)
+            }
+          }
+
+          // 2. Check active section
+          const activationLine = Math.min(180, window.innerHeight * 0.3)
+          let nextSection = "home"
+          for (const id of sections) {
+            const el = document.getElementById(id)
+            if (el) {
+              const bounds = el.getBoundingClientRect()
+              if (bounds.top <= activationLine) {
+                nextSection = id === "methods" || id === "skills" ? "about" : id
+              }
+            }
+          }
+          if (nextSection !== lastSection) {
+            lastSection = nextSection
+            setActiveSection(nextSection)
+          }
+
+          ticking = false
+        })
+        ticking = true
       }
-      setActiveSection(nextSection)
     }
-    handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", handleScroll)
+
+    onScrollOrResize()
+    window.addEventListener("scroll", onScrollOrResize, { passive: true })
+    window.addEventListener("resize", onScrollOrResize, { passive: true })
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleScroll)
+      window.removeEventListener("scroll", onScrollOrResize)
+      window.removeEventListener("resize", onScrollOrResize)
     }
   }, [])
 
